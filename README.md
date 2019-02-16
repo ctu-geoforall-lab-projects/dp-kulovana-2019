@@ -23,3 +23,7 @@ TBD
 ## Defence
 
 June 2019
+
+## Original reference
+
+https://github.com/gislab-npo/gislab/issues/297
