@@ -2,7 +2,7 @@
 
 ## Title
 
-TBD
+GIS.lab Web Administration Console
 
 ## Description
 
