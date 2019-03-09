@@ -1,2 +1,13 @@
 src/web_console_env
 *.pyc
+*.aux
+*.gz
+*.loa
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.bbl
+*.blg
+text/tereza-kulovana-dp-2019.pdf
