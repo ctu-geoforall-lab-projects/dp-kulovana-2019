@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$41=&n#$+n@canozr_bdi@_&s=j)@7!s1_h3!_fr!6ba&5oyzj'
+SECRET_KEY = '9(9bn2c4jye!yg)ek85(v4(%h$ms7&qj6p6-jb2y=*^i+mqglm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gislab-vm.fsv.cvut.cz']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -54,7 +54,7 @@ ROOT_URLCONF = 'web_console_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,6 +79,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -118,56 +119,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/'
-
-# Baseline configuration.
-
-INSTALLED_APPS = INSTALLED_APPS + ['django_python3_ldap']
-
-AUTHENTICATION_BACKENDS = (
-    'django_python3_ldap.auth.LDAPBackend',
-#    'django_auth_ldap.backend.LDAPBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
-LDAP_AUTH_URL = "ldap://127.0.0.1:389"
-
-LDAP_AUTH_USE_TLS = True
-
-LDAP_AUTH_SEARCH_BASE = "ou=people,dc=gis,dc=lab"
-
-LDAP_AUTH_USER_FIELDS = {
-    "username": "uid",
-    "first_name": "givenName",
-    "last_name": "sn",
-    "email": "mail",
-}
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler'
-        },
-        # 'file': {
-        #     'level': 'DEBUG',
-        #     'class': 'logging.FileHandler',
-        #     'filename': '/tmp/debug.log',
-        # },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True
-        }
-    },
-    "loggers": {
-        "django_python3_ldap": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-        },
-    }
-}
+#from settings_custom import *
+try:
+   from .settings_custom import *
+except ImportError:
+    raise Exception("A local_settings.py file is required to run this project")
