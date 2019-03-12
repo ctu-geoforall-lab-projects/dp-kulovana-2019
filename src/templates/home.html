@@ -4,7 +4,19 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
+<h2>Personal details</h2>
+  Username: {{ user.username }}<br> 
+  First name: {{ user.first_name }}<br> 
+  Last name: {{ user.last_name }}<br> 
+  E-mail: {{ user.email }}<br> 
+  Description: {{ user.description }}<br>
+
+<h2>Change password</h2>
+
+<h2>Roles (add/remove)</h2>
+
+<h2>Roles (edit)</h2>
+ 
   <p><a href="{% url 'logout' %}">logout</a></p>
 {% else %}
   <p>You are not logged in</p>
