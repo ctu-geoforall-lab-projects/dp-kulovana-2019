@@ -15,14 +15,13 @@ sudo apt install python3-venv
 python3 -V
 
 # create virtual environment and install django
+requirements=`pwd`/requirements.txt
+
 cd $PROJ_PATH
 python3.6 -m venv virenv
 source virenv/bin/activate
-pip install django==2.1.7
+pip install -r $requirements
 django-admin --version
-
-#install ldap
-pip install django_python3_ldap
 
 # create a sample project
 django-admin startproject web_console_project .
