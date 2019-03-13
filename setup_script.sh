@@ -1,7 +1,9 @@
 #!/bin/bash
 
+set -e
+
 # set project path, delete if already exists and create a new one
-PROJ_PATH=/mnt/home/gislab/project_gislab_web 
+PROJ_PATH=/mnt/home/gislab/project_gislab_web
 rm -rf $PROJ_PATH
 mkdir $PROJ_PATH
 
