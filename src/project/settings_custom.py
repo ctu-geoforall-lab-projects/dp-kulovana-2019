@@ -47,8 +47,10 @@ LDAP_AUTH_USER_FIELDS = {
     "first_name": "givenName",
     "last_name": "sn",
     "email": "mail",
-#    "description": "description",
+    "description": "description",
 }
+
+LDAP_AUTH_SYNC_USER_RELATIONS =   "web_console_project.ldap_auth.custom_sync_user_relations"
 
 ### LOGGING ###
 LOGGING = {
