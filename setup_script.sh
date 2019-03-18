@@ -3,7 +3,7 @@
 set -e
 
 # set project path, delete if already exists and create a new one
-PROJ_PATH=/mnt/home/gislab/project_gislab_web
+PROJ_PATH=/mnt/home/gislab/project_gislab_web_superuser
 rm -rf $PROJ_PATH
 mkdir $PROJ_PATH
 
@@ -42,6 +42,7 @@ cp $PROJ_PATH/dp-kulovana-2019/src/users/views.py $PROJ_PATH/users/views.py
 cp $PROJ_PATH/dp-kulovana-2019/src/project/settings.py $PROJ_PATH/web_console_project/settings.py
 cp $PROJ_PATH/dp-kulovana-2019/src/project/settings_custom.py $PROJ_PATH/web_console_project/settings_custom.py
 cp $PROJ_PATH/dp-kulovana-2019/src/project/urls.py $PROJ_PATH/web_console_project/urls.py
+cp $PROJ_PATH/dp-kulovana-2019/src/project/ldap_auth.py $PROJ_PATH/web_console_project/ldap_auth.py
 
 # migrate db
 python manage.py makemigrations users
