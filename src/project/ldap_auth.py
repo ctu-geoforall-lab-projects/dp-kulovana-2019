@@ -42,7 +42,6 @@ def custom_sync_user_relations(user, ldap_attributes):
 
         # get a group object if already exists or create a new group
         new_group, created = Group.objects.get_or_create(name=group.cn)
-        logger.info(f'{group.cn} was created')
 
         # check whether is user in a selected group
         CUSTOM_SEARCH_FILTER = f'(&(ObjectClass=posixGroup)(cn={group.cn})(memberUid={user.username}))'
@@ -55,14 +54,18 @@ def custom_sync_user_relations(user, ldap_attributes):
         # add user to a selected group
         if search_res:
             user.groups.add(new_group)
-            # if user part of gislabadmins -> add superuser status
-            if group.cn == "gislabadmins":
-                user.is_staff = True
-                user.is_superuser = True
-                user.save()
             logger.info(f'User {user.username} is in {group.cn}')
         else:
+            user.groups.remove(new_group)
             logger.info(f'User {user.username} is not in {group.cn}')
+
+        # if user part of gislabadmins -> add superuser status
+        if group.cn == "gislabadmins":
+                user.is_staff = search_res
+                user.is_superuser = search_res
+                user.save()
+                if search_res:
+                    logger.info(f'User {user.username} is a superuser')
 
     # All done!
     return
