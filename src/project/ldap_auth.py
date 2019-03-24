@@ -35,10 +35,25 @@ def custom_sync_user_relations(user, ldap_attributes):
             attributes = ldap3.ALL_ATTRIBUTES,
     )
 
-    group_list = c.entries
+    groups_ldap = c.entries
+
+    # list of LDAP group names
+    groups_ldap_cn = []
+    for one_group_ldap in groups_ldap:
+        groups_ldap_cn.append(one_group_ldap.cn.value)
+    logger.info(f'List of group names (CN) in LDAP: {groups_ldap_cn}')
+
+    # test if all Django groups are in LDAP
+    groups_django = Group.objects.all()
+    logger.info(f'List of django groups before comparison: {Group.objects.all()}')
+    for one_group_django in groups_django:
+        if one_group_django.name not in groups_ldap_cn:
+            Group.objects.get(name=one_group_django).delete()
+            logger.info(f'Group {one_group_django} was deleted from Django')
+    logger.info(f'List of django groups after comparison: {Group.objects.all()}')
 
     # iterate through groups
-    for group in group_list:
+    for group in groups_ldap:
 
         # get a group object if already exists or create a new group
         new_group, created = Group.objects.get_or_create(name=group.cn)
