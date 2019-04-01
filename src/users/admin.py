@@ -10,6 +10,7 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
     list_display = ['username', 'first_name', 'last_name', 'email', 'description', 'is_superuser']
+    list_filter = ['is_superuser', 'groups']
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (('Personal info'), {'fields': ('first_name', 'last_name', 'email', 'description')}),
