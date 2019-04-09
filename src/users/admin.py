@@ -5,6 +5,9 @@ from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 
+import logging
+logger = logging.getLogger('django')
+
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
@@ -18,5 +21,19 @@ class CustomUserAdmin(UserAdmin):
                                        'groups',)}),
         (('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
+
+    def save_model(self, request, obj, form, change):
+        obj.save()
+
+        import sys
+        import os
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+        from web_console_project.ldap_sync import SyncDjangoLDAP as snc
+
+        sn = snc(obj)
+        if change:
+            sn.change_user(obj, form)
+        else:
+            sn.save_user(obj, form)
 
 admin.site.register(CustomUser, CustomUserAdmin)
