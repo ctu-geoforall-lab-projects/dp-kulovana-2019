@@ -55,6 +55,19 @@ class SyncDjangoLDAP():
                 {'description': [(ldap3.MODIFY_REPLACE, [f'{obj.description}'])]})
             logger.info(f'Account {obj.username} updated with description {obj.description}')
 
-
     def save_user(self, obj, form):
         logger.info('save_user function')
+        self._connection.add(f'uid={obj.username},ou=People,dc=gis,dc=lab', attributes={
+            'objectClass': ['inetOrgPerson', 'posixAccount', 'shadowAccount'],
+            'uidNumber': 3005,
+            'gidNumber': 3001,
+            'homeDirectory': f'/mnt/home/{obj.username}',
+            'loginShell': '/bin/bash',
+            'cn': '{obj.first_name} + {obj.last_name}',
+            'sn': '{obj.last_name}',
+            'givenName': '{obj.first_name}',
+            'mail': '{obj.email}',
+            'userPassword': obj.password
+            }
+        )
+        logger.info(f'Successfully added user {obj.username} to LDAP')
