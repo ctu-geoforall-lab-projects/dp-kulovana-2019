@@ -17,19 +17,18 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (('Personal info'), {'fields': ('first_name', 'last_name', 'email', 'description')}),
-        (('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'groups',)}),
+        (('Permissions'), {'fields': ('groups')}),
         (('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
     def save_model(self, request, obj, form, change):
-        obj.save()
+        form.save_m2m()
+        super().save_model(request, obj, form, change)
 
         import sys
         import os
         sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
         from web_console_project.ldap_sync import SyncDjangoLDAP as snc
-
         sn = snc(obj)
         if change:
             sn.change_user(obj, form)
