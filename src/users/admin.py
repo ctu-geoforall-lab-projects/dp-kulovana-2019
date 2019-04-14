@@ -4,6 +4,10 @@ from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+from web_console_project.ldap_sync import SyncDjangoLDAP as snc
 
 import logging
 logger = logging.getLogger('django')
@@ -26,14 +30,19 @@ class CustomUserAdmin(UserAdmin):
         form.save_m2m()
         super().save_model(request, obj, form, change)
 
-        import sys
-        import os
-        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-        from web_console_project.ldap_sync import SyncDjangoLDAP as snc
+        # call ldap sync functions
         sn = snc(obj)
         if change:
             sn.change_user(obj, form)
         else:
             sn.save_user(obj, form)
+
+    def delete_model(self, request, obj):
+        # delete user and all its relations from LDAP
+        sn = snc(obj)
+        sn.delete_user(obj)
+
+        # delete user from Django
+        super().delete_model(request, obj)
 
 admin.site.register(CustomUser, CustomUserAdmin)
