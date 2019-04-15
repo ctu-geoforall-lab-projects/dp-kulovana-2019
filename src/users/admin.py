@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.admin import UserAdmin, GroupAdmin
+from django.contrib.auth.models import Group
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
@@ -45,4 +46,16 @@ class CustomUserAdmin(UserAdmin):
         # delete user from Django
         super().delete_model(request, obj)
 
+class CustomGroupAdmin(GroupAdmin):
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+
+        # call ldap sync functions
+        sn = snc(obj)
+        if not change:
+            sn.save_group(obj, form)
+
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.unregister(Group)
+admin.site.register(Group, CustomGroupAdmin)

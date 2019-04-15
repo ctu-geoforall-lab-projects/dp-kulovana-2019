@@ -37,7 +37,6 @@ class SyncDjangoLDAP():
 
     def change_user(self, obj, form):
         logger.info('change_user function')
-
         if 'first_name' in form.changed_data:
             self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
                     {'givenName': [(ldap3.MODIFY_REPLACE, [f'{obj.first_name}'])]})
@@ -113,6 +112,16 @@ class SyncDjangoLDAP():
         # delete user from LDAP
         self._connection.delete(f'uid={obj.username},ou=People,dc=gis,dc=lab')
         logger.info(f'Successfully deleted user {obj.username} from LDAP')
+
+    def save_group(self, obj, form):
+        logger.info('save_group function')
+        self._connection.add(f'cn={obj.name},ou=Groups,dc=gis,dc=lab', attributes={
+            'objectClass': ['posixGroup', ],
+            'cn': f'{obj.name}',
+            'gidNumber': 3105
+             }
+        )
+        logger.info(f'Successfully added group {obj.name} to LDAP')
 
     def _ldap_group_membership(self, obj, group):
         # check if user is in the LDAP group
