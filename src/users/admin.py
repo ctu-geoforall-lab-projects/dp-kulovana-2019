@@ -27,6 +27,12 @@ class CustomUserAdmin(UserAdmin):
     )
     readonly_fields = ['last_login', 'date_joined']
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ['username',]
+        else:
+            return []
+
     def save_model(self, request, obj, form, change):
         form.save_m2m()
         super().save_model(request, obj, form, change)
@@ -49,6 +55,12 @@ class CustomUserAdmin(UserAdmin):
 class CustomGroupAdmin(GroupAdmin):
     list_display = ['name', ]
     fieldsets = ((None, {'fields': ('name', )}), )
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ["name", ]
+        else:
+            return []
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
