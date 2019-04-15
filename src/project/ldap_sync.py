@@ -123,6 +123,27 @@ class SyncDjangoLDAP():
         )
         logger.info(f'Successfully added group {obj.name} to LDAP')
 
+    def delete_group(self, obj):
+        # get LDAP group
+        SEARCH_BASE_GROUPS = "ou=groups,dc=gis,dc=lab"
+        CUSTOM_SEARCH_FILTER = f'(&(ObjectClass=posixGroup)(cn={obj.name}))'
+        self._connection.search(
+            search_base = SEARCH_BASE_GROUPS,
+            search_filter = CUSTOM_SEARCH_FILTER,
+            attributes=ldap3.ALL_ATTRIBUTES,
+        )
+        ldap_group = self._connection.entries
+
+        # get users belonging to a selected group and delete them
+        for entry in ldap_group:
+            for user in entry.memberUid:
+                self._connection.modify(f'cn={obj.name},ou=Groups,dc=gis,dc=lab',
+                    {'memberUid': [(ldap3.MODIFY_DELETE, [f'{user}'])]})
+
+        # delete group from LDAP
+        self._connection.delete(f'cn={obj.name},ou=Groups,dc=gis,dc=lab')
+        logger.info(f'Successfully deleted group {obj.name} from LDAP')
+
     def _ldap_group_membership(self, obj, group):
         # check if user is in the LDAP group
         SEARCH_BASE_GROUPS = "ou=groups,dc=gis,dc=lab"

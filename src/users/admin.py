@@ -56,6 +56,14 @@ class CustomGroupAdmin(GroupAdmin):
         if not change:
             sn.save_group(obj, form)
 
+    def delete_model(self, request, obj):
+        # delete group and all its relations from LDAP
+        sn = snc(obj)
+        sn.delete_group(obj)
+
+        # delete group from Django
+        super().delete_model(request, obj)
+
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.unregister(Group)
 admin.site.register(Group, CustomGroupAdmin)
