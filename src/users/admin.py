@@ -81,3 +81,6 @@ class CustomGroupAdmin(GroupAdmin):
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.unregister(Group)
 admin.site.register(Group, CustomGroupAdmin)
+admin.site.site_header = "GIS.lab Administration"
+admin.site.site_title = "GIS.lab Admin Portal"
+admin.site.index_title = "Welcome to GIS.lab Administration Portal"
