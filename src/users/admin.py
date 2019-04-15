@@ -47,6 +47,8 @@ class CustomUserAdmin(UserAdmin):
         super().delete_model(request, obj)
 
 class CustomGroupAdmin(GroupAdmin):
+    list_display = ['name', ]
+    fieldsets = ((None, {'fields': ('name', )}), )
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
