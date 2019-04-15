@@ -37,29 +37,34 @@ class SyncDjangoLDAP():
 
     def change_user(self, obj, form):
         logger.info('change_user function')
+
         if 'first_name' in form.changed_data:
             self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
                     {'givenName': [(ldap3.MODIFY_REPLACE, [f'{obj.first_name}'])]})
             logger.info(f'Account {obj.username} updated with first name {obj.first_name}')
+
         if 'last_name' in form.changed_data:
             self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
                                     {'sn': [(ldap3.MODIFY_REPLACE, [f'{obj.last_name}'])]})
             logger.info(f'Account {obj.username} updated with surname {obj.last_name}')
+
         if 'email' in form.changed_data:
             self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
                 {'mail': [(ldap3.MODIFY_REPLACE, [f'{obj.email}'])]})
             logger.info(f'Account {obj.username} updated with mail {obj.email}')
+
         if 'description' in form.changed_data:
             self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
                 {'description': [(ldap3.MODIFY_REPLACE, [f'{obj.description}'])]})
             logger.info(f'Account {obj.username} updated with description {obj.description}')
+
         if 'groups' in form.changed_data:
             groups_django = Group.objects.all()
             for one_group_django in groups_django:
                 # check if user is in Django group
                 django_group = obj.groups.filter(name=f'{one_group_django}').exists()
                 # check if user is in the same LDAP group
-                ldap_group = _ldap_group_membeship(obj, one_group_django)
+                ldap_group = self._ldap_group_membership(obj, one_group_django)
                 # user in Django and not in LDAP
                 if django_group and not ldap_group:
                     self._connection.modify(f'cn={one_group_django},ou=Groups,dc=gis,dc=lab',

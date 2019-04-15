@@ -24,7 +24,7 @@ class CustomUserAdmin(UserAdmin):
         (('Permissions'), {'fields': ('groups', )}),
         (('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
-    readonly_fields = ['username', 'last_login', 'date_joined']
+    readonly_fields = ['last_login', 'date_joined']
 
     def save_model(self, request, obj, form, change):
         form.save_m2m()
