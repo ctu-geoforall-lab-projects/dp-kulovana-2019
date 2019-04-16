@@ -102,6 +102,25 @@ class SyncDjangoLDAP():
         )
         logger.info(f'Successfully added user {obj.username} to LDAP')
 
+
+    def save_user_sign_up(self, obj):
+        logger.info('save_user_sign_up function')
+        self._connection.add(f'uid={obj.username},ou=People,dc=gis,dc=lab', attributes={
+            'objectClass': ['inetOrgPerson', 'posixAccount', 'shadowAccount'],
+            'uidNumber': 3005,
+            'gidNumber': 3001,
+            'homeDirectory': f'/mnt/home/{obj.username}',
+            'loginShell': '/bin/bash',
+            'cn': f'{obj.first_name} {obj.last_name}',
+            'sn': f'{obj.last_name}',
+            'givenName': f'{obj.first_name}',
+            'mail': f'{obj.email}',
+            'userPassword': obj.password
+            }
+        )
+        logger.info(f'Successfully added user {obj.username} to LDAP')
+
+
     def delete_user(self, obj):
         # remove all user relations from LDAP
         groups_django = Group.objects.all()
