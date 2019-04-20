@@ -25,13 +25,19 @@ class CustomUserAdmin(UserAdmin):
         (('Permissions'), {'fields': ('groups', )}),
         (('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
-    readonly_fields = ['last_login', 'date_joined']
 
+    # disable changing username
     def get_readonly_fields(self, request, obj=None):
         if obj:
-            return ['username',]
+            return ['username', 'last_login', 'date_joined']
         else:
-            return []
+            return ['last_login', 'date_joined']
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
 
     def save_model(self, request, obj, form, change):
         form.save_m2m()
@@ -56,11 +62,18 @@ class CustomGroupAdmin(GroupAdmin):
     list_display = ['name', ]
     fieldsets = ((None, {'fields': ('name', )}), )
 
+    # disable changing name of a group
     def get_readonly_fields(self, request, obj=None):
         if obj:
             return ["name", ]
         else:
             return []
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
