@@ -53,8 +53,13 @@ class SyncDjangoLDAP():
             logger.info(f'Account {obj.username} updated with mail {obj.email}')
 
         if 'description' in form.changed_data:
-            self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
-                {'description': [(ldap3.MODIFY_REPLACE, [f'{obj.description}'])]})
+            logger.info(f'desc: {obj.description}')
+            if not obj.description:
+                self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
+                    {'description': [(ldap3.MODIFY_DELETE, [])]})
+            else:
+                self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
+                    {'description': [(ldap3.MODIFY_REPLACE, [f'{obj.description}'])]})
             logger.info(f'Account {obj.username} updated with description {obj.description}')
 
         if 'groups' in form.changed_data:

@@ -10,7 +10,17 @@ from web_console_project.ldap_sync import SyncDjangoLDAP as snc
 import logging
 logger = logging.getLogger('django')
 
-class CustomUserCreationForm(UserCreationForm):
+class FieldsRequiredMixin(object):
+    def __init__(self, *args, **kwargs):
+        super(EmailRequiredMixin, self).__init__(*args, **kwargs)
+
+        # make first_name, last_name nad email fields required
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        self.fields['email'].required = True
+        self.fields['description'].required = False
+
+class CustomUserCreationForm(FieldsRequiredMixin, UserCreationForm):
 
     class Meta(UserCreationForm):
         model = CustomUser
@@ -27,7 +37,7 @@ class CustomUserCreationForm(UserCreationForm):
             sn.save_user_sign_up(user)
         return user
 
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeForm(FieldsRequiredMixin, UserChangeForm):
 
     class Meta:
         model = CustomUser
