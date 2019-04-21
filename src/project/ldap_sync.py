@@ -160,9 +160,12 @@ class SyncDjangoLDAP():
 
         # get users belonging to a selected group and delete them
         for entry in ldap_group:
-            for user in entry.memberUid:
-                self._connection.modify(f'cn={obj.name},ou=Groups,dc=gis,dc=lab',
-                    {'memberUid': [(ldap3.MODIFY_DELETE, [f'{user}'])]})
+            try:
+                for user in entry.memberUid:
+                    self._connection.modify(f'cn={obj.name},ou=Groups,dc=gis,dc=lab',
+                        {'memberUid': [(ldap3.MODIFY_DELETE, [f'{user}'])]})
+            except:
+                pass
 
         # delete group from LDAP
         self._connection.delete(f'cn={obj.name},ou=Groups,dc=gis,dc=lab')
