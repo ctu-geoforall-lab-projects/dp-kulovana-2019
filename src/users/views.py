@@ -29,16 +29,12 @@ class ChangeUser(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy('home')
     template_name = 'user_change.html'
 
-    redirect_field_name = 'redirect_to'
-
     def form_valid(self, form):
         # change user in Django
-        edited_user = form.save(commit=False)
-        edited_user.user = self.request.user
-        edited_user.save()
+        self.object = form.save()
 
         # change user in LDAP
-        sn = snc(edited_user)
-        sn.change_user(edited_user, form)
+        sn = snc(self.object)
+        sn.change_user(self.object, form)
 
-        return render(self.request,'home.html', {'userdata': edited_user})
+        return super().form_valid(form)
