@@ -9,8 +9,9 @@ logger = logging.getLogger('django')
 def custom_sync_user_relations(user, ldap_attributes):
 
     # create connection
-    username = None
-    password= None
+    username = settings.LDAP_AUTH_CONNECTION_USERNAME
+    password = settings.LDAP_AUTH_CONNECTION_PASSWORD
+
     auto_bind = ldap3.AUTO_BIND_TLS_BEFORE_BIND
 
     c = ldap3.Connection(
