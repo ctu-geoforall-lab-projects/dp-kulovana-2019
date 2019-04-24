@@ -52,11 +52,11 @@ class SyncDjangoLDAP():
             logger.info(f'Account {obj.username} updated with mail {obj.email}')
 
         if 'description' in form.changed_data:
-            logger.info(f'desc: {obj.description}')
             if not obj.description:
                 self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
                     {'description': [(ldap3.MODIFY_DELETE, [])]})
             else:
+
                 self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
                     {'description': [(ldap3.MODIFY_REPLACE, [f'{obj.description}'])]})
             logger.info(f'Account {obj.username} updated with description {obj.description}')
@@ -88,26 +88,7 @@ class SyncDjangoLDAP():
                     if django_group:
                         logger.info(f'User {obj.username} is a superuser')
 
-
-    def save_user(self, obj, form):
-        logger.info('save_user function')
-        self._connection.add(f'uid={obj.username},ou=People,dc=gis,dc=lab', attributes={
-            'objectClass': ['inetOrgPerson', 'posixAccount', 'shadowAccount'],
-            'uidNumber': 3005,
-            'gidNumber': 3001,
-            'homeDirectory': f'/mnt/home/{obj.username}',
-            'loginShell': '/bin/bash',
-            'cn': '{obj.first_name} + {obj.last_name}',
-            'sn': '{obj.last_name}',
-            'givenName': '{obj.first_name}',
-            'mail': '{obj.email}',
-            'userPassword': obj.password
-            }
-        )
-        logger.info(f'Successfully added user {obj.username} to LDAP')
-
-
-    def save_user_sign_up(self, obj):
+    def save_user(self, obj, password):
         logger.info('save_user_sign_up function')
         self._connection.add(f'uid={obj.username},ou=People,dc=gis,dc=lab', attributes={
             'objectClass': ['inetOrgPerson', 'posixAccount', 'shadowAccount'],
@@ -119,11 +100,10 @@ class SyncDjangoLDAP():
             'sn': f'{obj.last_name}',
             'givenName': f'{obj.first_name}',
             'mail': f'{obj.email}',
-            'userPassword': obj.password
+            'userPassword': password
             }
         )
         logger.info(f'Successfully added user {obj.username} to LDAP')
-
 
     def delete_user(self, obj):
         # remove all user relations from LDAP

@@ -55,7 +55,7 @@ class CustomUserAdmin(UserAdmin):
         if change:
             sn.change_user(obj, form)
         else:
-            sn.save_user(obj, form)
+            sn.save_user(obj, form.cleaned_data["password1"]))
 
     def delete_model(self, request, obj):
         # delete user and all its relations from LDAP

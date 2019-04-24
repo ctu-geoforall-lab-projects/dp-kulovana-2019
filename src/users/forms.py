@@ -12,7 +12,7 @@ logger = logging.getLogger('django')
 
 class FieldsRequiredMixin(object):
     def __init__(self, *args, **kwargs):
-        super(EmailRequiredMixin, self).__init__(*args, **kwargs)
+        super(FieldsRequiredMixin, self).__init__(*args, **kwargs)
 
         # make first_name, last_name nad email fields required
         self.fields['first_name'].required = True
@@ -34,7 +34,7 @@ class CustomUserCreationForm(FieldsRequiredMixin, UserCreationForm):
             user.save()
             # save user to LDAP
             sn = snc(user)
-            sn.save_user_sign_up(user)
+            sn.save_user(user, self.cleaned_data["password1"])
         return user
 
 class CustomUserChangeForm(FieldsRequiredMixin, UserChangeForm):
