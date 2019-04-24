@@ -15,6 +15,13 @@ logger = logging.getLogger('django')
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'first_name', 'last_name', 'email', 'description', 'password1', 'password2')}
+        ),
+    )
+
     form = CustomUserChangeForm
     model = CustomUser
     list_display = ['username', 'first_name', 'last_name', 'email', 'description', 'is_superuser']
