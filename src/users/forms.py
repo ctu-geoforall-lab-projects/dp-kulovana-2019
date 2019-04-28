@@ -25,6 +25,11 @@ class CustomUserCreationForm(FieldsRequiredMixin, UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
         fields = ('username', 'first_name', 'last_name', 'email', 'description')
+        help_texts = {
+            'first_name': 'Required.',
+            'last_name': 'Required.',
+            'email': 'Required.'
+        }
 
     def save(self, commit=True):
         user = super().save(commit=False)
