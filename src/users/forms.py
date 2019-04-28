@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm, AdminPasswordChangeForm
 from .models import CustomUser
 
 import sys
@@ -47,3 +47,28 @@ class CustomUserChangeForm(FieldsRequiredMixin, UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('first_name', 'last_name', 'email', 'description')
+
+class CustomAdminPasswordChangeForm(AdminPasswordChangeForm):
+
+    def save(self, commit=True):
+        """Save the new password."""
+        password = self.cleaned_data["password1"]
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+            # save new password to LDAP
+            sn = snc(self.user)
+            sn.change_password(self.user, self.cleaned_data["password1"])
+        return self.user
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+
+    def save(self, commit=True):
+        password = self.cleaned_data["new_password1"]
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+            # save new password to LDAP
+            sn = snc(self.user)
+            sn.change_password(self.user, self.cleaned_data["new_password1"])
+        return self.user

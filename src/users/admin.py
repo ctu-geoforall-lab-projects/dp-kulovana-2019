@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
 
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, CustomAdminPasswordChangeForm
 from .models import CustomUser
 import sys
 import os
@@ -24,6 +24,8 @@ class CustomUserAdmin(UserAdmin):
 
     form = CustomUserChangeForm
     model = CustomUser
+    change_password_form = CustomAdminPasswordChangeForm
+
     list_display = ['username', 'first_name', 'last_name', 'email', 'description', 'is_superuser']
     list_filter = ['is_superuser', 'groups']
     fieldsets = (
@@ -55,7 +57,7 @@ class CustomUserAdmin(UserAdmin):
         if change:
             sn.change_user(obj, form)
         else:
-            sn.save_user(obj, form.cleaned_data["password1"]))
+            sn.save_user(obj, form.cleaned_data["password1"])
 
     def delete_model(self, request, obj):
         # delete user and all its relations from LDAP
