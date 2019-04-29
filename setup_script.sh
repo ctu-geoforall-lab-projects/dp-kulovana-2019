@@ -44,6 +44,7 @@ cp /tmp/dp-kulovana-2019/src/project/settings.py $PROJ_PATH/web_console_project/
 cp /tmp/dp-kulovana-2019/src/project/settings_custom.py $PROJ_PATH/web_console_project/settings_custom.py
 cp /tmp/dp-kulovana-2019/src/project/urls.py $PROJ_PATH/web_console_project/urls.py
 cp /tmp/dp-kulovana-2019/src/project/ldap_auth.py $PROJ_PATH/web_console_project/ldap_auth.py
+cp /tmp/dp-kulovana-2019/src/project/ldap_sync.py $PROJ_PATH/web_console_project/ldap_sync.py
 
 # delete github repository
 rm -rf /tmp/dp-kulovana-2019
