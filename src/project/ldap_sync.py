@@ -6,15 +6,13 @@ import logging
 logger = logging.getLogger('django')
 
 class SyncDjangoLDAP():
-    """
-    Class for synchronizing LDAP groups to Django and Django db to LDAP.
-    """
+    """Synchronize changes and new models from Django db into LDAP."""
+
     def __init__(self, user):
-        """
-        Creates the LDAP connection.
-        """
-        username = settings.LDAP_AUTH_CONNECTION_USERNAME
-        password = settings.LDAP_AUTH_CONNECTION_PASSWORD
+        """Creates the LDAP connection."""
+
+        username = f'uid=django_admin,ou=People,dc=gis,dc=lab'
+        password = 'django2019'
 
         auto_bind = ldap3.AUTO_BIND_TLS_BEFORE_BIND
 
@@ -35,7 +33,10 @@ class SyncDjangoLDAP():
         self._connection = c
 
     def change_user(self, obj, form):
-        logger.info('change_user function')
+        """Change user attributes in LDAP according to Django changes."""
+
+        logger.info('SyncDjangoLDAP change_user function')
+
         if 'first_name' in form.changed_data:
             self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
                     {'givenName': [(ldap3.MODIFY_REPLACE, [f'{obj.first_name}'])]})
@@ -66,12 +67,18 @@ class SyncDjangoLDAP():
             logger.info(f'Account {obj.username} updated with description {obj.description}')
 
         if 'groups' in form.changed_data:
+
+            # get all existing Django groups
             groups_django = Group.objects.all()
+
             for one_group_django in groups_django:
+
                 # check if user is in Django group
                 django_group = obj.groups.filter(name=f'{one_group_django}').exists()
+
                 # check if user is in the same LDAP group
                 ldap_group = self._ldap_group_membership(obj, one_group_django)
+
                 # user in Django and not in LDAP
                 if django_group and not ldap_group:
                     self._connection.modify(f'cn={one_group_django},ou=Groups,dc=gis,dc=lab',
@@ -93,13 +100,21 @@ class SyncDjangoLDAP():
                         logger.info(f'User {obj.username} is a superuser')
 
     def change_password(self, obj, new_password):
-         logger.info('change_password function')
+        """Change user password in LDAP according to Django changes."""
+
+         logger.info('SyncDjangoLDAP change_password function')
+
+         # change password in LDAP
          self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
              {'userPassword': [(ldap3.MODIFY_REPLACE, [new_password])]})
          logger.info(f'Account {obj.username} updated with password {new_password}')
 
     def save_user(self, obj, password):
-        logger.info('save_user_sign_up function')
+        """Add new user into LDAP."""
+
+        logger.info('SyncDjangoLDAP save_user function')
+
+        # add new user into LDAP
         self._connection.add(f'uid={obj.username},ou=People,dc=gis,dc=lab', attributes={
             'objectClass': ['inetOrgPerson', 'posixAccount', 'shadowAccount'],
             'uidNumber': 3005,
@@ -116,18 +131,27 @@ class SyncDjangoLDAP():
         logger.info(f'Successfully added user {obj.username} to LDAP')
 
     def delete_user(self, obj):
+        """Delete user from LDAP."""
+
+        logger.info('SyncDjangoLDAP delete_user function')
+
         # remove all user relations from LDAP
         groups_django = Group.objects.all()
         for one_group_django in groups_django:
             if self._ldap_group_membership(obj, one_group_django):
                 self._connection.modify(f'cn={one_group_django},ou=Groups,dc=gis,dc=lab',
                     {'memberUid': [(ldap3.MODIFY_DELETE, [f'{obj.username}'])]})
+
         # delete user from LDAP
         self._connection.delete(f'uid={obj.username},ou=People,dc=gis,dc=lab')
         logger.info(f'Successfully deleted user {obj.username} from LDAP')
 
     def save_group(self, obj, form):
-        logger.info('save_group function')
+        """Add new group into LDAP."""
+
+        logger.info('SyncDjangoLDAP save_group function')
+
+        # add new group into LDAP
         self._connection.add(f'cn={obj.name},ou=Groups,dc=gis,dc=lab', attributes={
             'objectClass': ['posixGroup', ],
             'cn': f'{obj.name}',
@@ -137,6 +161,10 @@ class SyncDjangoLDAP():
         logger.info(f'Successfully added group {obj.name} to LDAP')
 
     def delete_group(self, obj):
+        """Delete group from LDAP."""
+
+        logger.info('SyncDjangoLDAP delete_group function')
+
         # get LDAP group
         SEARCH_BASE_GROUPS = "ou=groups,dc=gis,dc=lab"
         CUSTOM_SEARCH_FILTER = f'(&(ObjectClass=posixGroup)(cn={obj.name}))'
@@ -161,6 +189,8 @@ class SyncDjangoLDAP():
         logger.info(f'Successfully deleted group {obj.name} from LDAP')
 
     def _ldap_group_membership(self, obj, group):
+        """Returns whether user belongs to a selected group in LDAP.."""
+
         # check if user is in the LDAP group
         SEARCH_BASE_GROUPS = "ou=groups,dc=gis,dc=lab"
         CUSTOM_SEARCH_FILTER = f'(&(ObjectClass=posixGroup)(cn={group})(memberUid={obj.username}))'

@@ -25,12 +25,13 @@ class SignUp(generic.CreateView):
 
 class ChangeUser(LoginRequiredMixin, generic.UpdateView):
     model = CustomUser
-
     form_class = CustomUserChangeForm
     success_url = reverse_lazy('home')
     template_name = 'user_change.html'
 
     def form_valid(self, form):
+        logger.info('ChangeUser form_valid function')
+
         # change user in Django
         self.object = form.save()
 
