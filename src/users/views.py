@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 
-from .forms import CustomUserCreationForm, CustomUserChangeForm, CustomPasswordChangeForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, CustomAdminPasswordChangeForm
 from .models import CustomUser
 
 import sys
@@ -41,6 +41,6 @@ class ChangeUser(LoginRequiredMixin, generic.UpdateView):
         return super().form_valid(form)
 
 class ChangePassword(LoginRequiredMixin, PasswordChangeView):
-    form_class = CustomPasswordChangeForm
+    form_class = CustomAdminPasswordChangeForm
     success_url = reverse_lazy('home') # in the future 'password_change_done'
     template_name = 'password_change.html'

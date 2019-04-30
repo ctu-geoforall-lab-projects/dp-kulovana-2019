@@ -1,9 +1,9 @@
 import os
 from django.conf import settings
 
-ALLOWED_HOSTS = ['gislab-vm.fsv.cvut.cz'] 
+ALLOWED_HOSTS = ['b802-01.fsv.cvut.cz']
 
-# Application definition 
+# Application definition
 
 INSTALLED_APPS = settings.INSTALLED_APPS + ['users.apps.UsersConfig', 'django_python3_ldap', ]
 
@@ -32,7 +32,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 ### LDAP AUTHENTICATION ###
 AUTHENTICATION_BACKENDS = (
     'django_python3_ldap.auth.LDAPBackend',
-    'django.contrib.auth.backends.ModelBackend',
+#    'django.contrib.auth.backends.ModelBackend',
 )
 
 
