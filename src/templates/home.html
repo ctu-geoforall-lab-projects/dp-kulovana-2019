@@ -5,6 +5,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+
 <h2>Personal details</h2>
   Username: {{ user.username }}<br> 
   First name: {{ user.first_name }}<br> 
@@ -12,11 +13,9 @@
   E-mail: {{ user.email }}<br> 
   Description: {{ user.description }}<br>
 
-<h2>Change password</h2>
+<a class="button-box" href="{% url 'user_change' user.id %}">Edit</a>
 
-<h2>Roles (add/remove)</h2>
-  <li>superuser: {{ user.is_superuser }}</li>
-
+<h2>Roles</h2>
   {% for group in request|list_groups %}
   <li>{{  group.name  }}:
      {% if request.user|has_group:group.name %}
@@ -25,8 +24,6 @@
        False
      {% endif %}</li>
   {% endfor %}
-
-<h2>Roles (edit)</h2>
  
   <p><a href="{% url 'logout' %}">logout</a></p>
 {% else %}
