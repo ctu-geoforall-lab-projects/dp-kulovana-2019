@@ -7,7 +7,11 @@ import logging
 logger = logging.getLogger('django')
 
 def custom_sync_user_relations(user, ldap_attributes):
-    """Sync groups and group membership between Django and LDAP."""
+    """Sync groups and group membership between Django and LDAP.
+
+    :param class user: custom user
+    :param dict ldap_attributes: LDAL attributes (not used)
+    """
 
     # create connection
     username = None
