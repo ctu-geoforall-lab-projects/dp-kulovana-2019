@@ -36,7 +36,7 @@ class ChangeUser(LoginRequiredMixin, generic.UpdateView):
         self.object = form.save()
 
         # change user in LDAP
-        sn = snc(self.object)
+        sn = snc()
         sn.change_user(self.object, form)
 
         return super().form_valid(form)

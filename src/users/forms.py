@@ -45,7 +45,7 @@ class CustomUserCreationForm(FieldsRequiredMixin, UserCreationForm):
             user.save()
 
             # save user to LDAP
-            sn = snc(user)
+            sn = snc()
             sn.save_user(user, self.cleaned_data["password1"])
 
         return user
@@ -71,7 +71,7 @@ class CustomAdminPasswordChangeForm(AdminPasswordChangeForm):
             self.user.save()
 
             # save new password to LDAP
-            sn = snc(self.user)
+            sn = snc()
             sn.change_password(self.user, self.cleaned_data["password1"])
 
         return self.user
@@ -90,7 +90,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
             self.user.save()
 
             # save new password to LDAP
-            sn = snc(self.user)
+            sn = snc()
             sn.change_password(self.user, self.cleaned_data["new_password1"])
 
         return self.user

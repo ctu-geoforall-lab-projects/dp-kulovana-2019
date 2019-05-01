@@ -63,7 +63,7 @@ class CustomUserAdmin(UserAdmin):
         super().save_model(request, obj, form, change)
 
         # call ldap sync functions
-        sn = snc(obj)
+        sn = snc()
         if change:
             # change user in LDAP
             sn.change_user(obj, form)
@@ -77,7 +77,7 @@ class CustomUserAdmin(UserAdmin):
         logger.info('CustomUserAdmin delete_model function')
 
         # delete user and all its relations from LDAP
-        sn = snc(obj)
+        sn = snc()
         sn.delete_user(obj)
 
         # delete user from Django
@@ -110,7 +110,7 @@ class CustomGroupAdmin(GroupAdmin):
         super().save_model(request, obj, form, change)
 
         # call ldap sync functions
-        sn = snc(obj)
+        sn = snc()
         if not change:
             # add group into LDAP
             sn.save_group(obj, form)
@@ -121,7 +121,7 @@ class CustomGroupAdmin(GroupAdmin):
         logger.info('CustomUserAdmin delete_model function')
 
         # delete group and all its relations from LDAP
-        sn = snc(obj)
+        sn = snc()
         sn.delete_group(obj)
 
         # delete group from Django
