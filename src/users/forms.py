@@ -1,11 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm, AdminPasswordChangeForm
-from .models import CustomUser
 
-import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-from web_console_project.ldap_sync import SyncDjangoLDAP as snc
+from .models import CustomUser
+from .ldap_sync import SyncDjangoLDAP
 
 import logging
 logger = logging.getLogger('django')
@@ -45,7 +42,7 @@ class CustomUserCreationForm(FieldsRequiredMixin, UserCreationForm):
             user.save()
 
             # save user to LDAP
-            sn = snc()
+            sn = SyncDjangoLDAP()
             sn.save_user(user, self.cleaned_data["password1"])
 
         return user
@@ -71,7 +68,7 @@ class CustomAdminPasswordChangeForm(AdminPasswordChangeForm):
             self.user.save()
 
             # save new password to LDAP
-            sn = snc()
+            sn = SyncDjangoLDAP()
             sn.change_password(self.user, self.cleaned_data["password1"])
 
         return self.user
@@ -90,7 +87,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
             self.user.save()
 
             # save new password to LDAP
-            sn = snc()
+            sn = SyncDjangoLDAP()
             sn.change_password(self.user, self.cleaned_data["new_password1"])
 
         return self.user

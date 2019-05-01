@@ -5,10 +5,7 @@ from django.contrib.auth.models import Group
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm, CustomAdminPasswordChangeForm
 from .models import CustomUser
-import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-from web_console_project.ldap_sync import SyncDjangoLDAP as snc
+from .ldap_sync import SyncDjangoLDAP
 
 import logging
 logger = logging.getLogger('django')
@@ -63,7 +60,7 @@ class CustomUserAdmin(UserAdmin):
         super().save_model(request, obj, form, change)
 
         # call ldap sync functions
-        sn = snc()
+        sn = SyncDjangoLDAP()
         if change:
             # change user in LDAP
             sn.change_user(obj, form)
@@ -77,7 +74,7 @@ class CustomUserAdmin(UserAdmin):
         logger.info('CustomUserAdmin delete_model function')
 
         # delete user and all its relations from LDAP
-        sn = snc()
+        sn = SyncDjangoLDAP()
         sn.delete_user(obj)
 
         # delete user from Django
@@ -110,7 +107,7 @@ class CustomGroupAdmin(GroupAdmin):
         super().save_model(request, obj, form, change)
 
         # call ldap sync functions
-        sn = snc()
+        sn = SyncDjangoLDAP()
         if not change:
             # add group into LDAP
             sn.save_group(obj, form)
@@ -121,7 +118,7 @@ class CustomGroupAdmin(GroupAdmin):
         logger.info('CustomUserAdmin delete_model function')
 
         # delete group and all its relations from LDAP
-        sn = snc()
+        sn = SyncDjangoLDAP()
         sn.delete_group(obj)
 
         # delete group from Django

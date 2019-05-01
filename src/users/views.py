@@ -7,11 +7,7 @@ from django.contrib.auth.views import PasswordChangeView
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm, CustomAdminPasswordChangeForm
 from .models import CustomUser
-
-import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-from web_console_project.ldap_sync import SyncDjangoLDAP as snc
+from .ldap_sync import SyncDjangoLDAP
 
 import logging
 logger = logging.getLogger('django')
@@ -36,7 +32,7 @@ class ChangeUser(LoginRequiredMixin, generic.UpdateView):
         self.object = form.save()
 
         # change user in LDAP
-        sn = snc()
+        sn = SyncDjangoLDAP()
         sn.change_user(self.object, form)
 
         return super().form_valid(form)

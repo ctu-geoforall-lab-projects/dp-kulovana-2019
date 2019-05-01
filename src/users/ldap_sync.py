@@ -11,8 +11,8 @@ class SyncDjangoLDAP():
     def __init__(self):
         """Creates the LDAP connection."""
 
-        username = 'username'
-        password = 'password'
+        username = f'uid=django_admin,ou=People,dc=gis,dc=lab'
+        password = 'django2019'
 
         auto_bind = ldap3.AUTO_BIND_TLS_BEFORE_BIND
 
@@ -102,12 +102,12 @@ class SyncDjangoLDAP():
     def change_password(self, obj, new_password):
         """Change user password in LDAP according to Django changes."""
 
-         logger.info('SyncDjangoLDAP change_password function')
+        logger.info('SyncDjangoLDAP change_password function')
 
-         # change password in LDAP
-         self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
-             {'userPassword': [(ldap3.MODIFY_REPLACE, [new_password])]})
-         logger.info(f'Account {obj.username} updated with password {new_password}')
+        # change password in LDAP
+        self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
+            {'userPassword': [(ldap3.MODIFY_REPLACE, [new_password])]})
+        logger.info(f'Account {obj.username} updated with password {new_password}')
 
     def save_user(self, obj, password):
         """Add new user into LDAP."""
