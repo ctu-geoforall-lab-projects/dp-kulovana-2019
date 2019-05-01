@@ -11,8 +11,8 @@ class SyncDjangoLDAP():
     def __init__(self):
         """Creates the LDAP connection."""
 
-        username = f'uid=django_admin,ou=People,dc=gis,dc=lab'
-        password = 'django2019'
+        username = 'username'
+        password = 'password'
 
         auto_bind = ldap3.AUTO_BIND_TLS_BEFORE_BIND
 
