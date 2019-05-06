@@ -1,9 +1,29 @@
 \chapter{Úvod}
 \label{1-uvod}
 
-Zeširoka se věnovat zadání.
+% http://gislab-npo.github.io/gislab/index.html
 
-Důvod pro volbu technologií (Python, Django) 
+Open-source GISová platforma GIS.lab slouží k rychlému a jednoduchému nasazení centrálně řízené GIS infrastruktury v lokální síti (LAN), data centra nebo cloudové služby. Poskytuje celistvý soubor neplaceného GIS softwaru integrovaného do jednoho systému, který je okamžitě připraven k použití.
+ 
+Všechny použité technologie jsou plně pod kontrolou správců, náklady na nasazení a vlastnictví takovéhoto komplexního řešení jsou sníženy na absolutní minimum. Díky tomu je možné GIS.lab využít v oblastech a podmínkách, kde by aplikace jiné technologie nebyla cenově dostupná či technicky možná. Příkladem mohou být zóny zasažené přírodní katastrofou či sféra školství a vzdělávacích institucí.
+
+% Co to už umí?
+GIS.lab je dostupný jako desktopový, webový a mobilní klient. Webový a mobilní klient jsou přístupné díky samostatné platformě Gisquick, která je automaticky integrovaná i do desktopové verze. GIS.lab Desktop obsahuje nejvíce funkcionalit, z nichž mezi nejdůležitější patří ukládání prostorově i neprostorově orientovaných dat a jejich sdílení, tvorba a analýza vektorových, rastrových i tabulkových dat nebo rychlé vytváření kartografických výstupů.
+
+% Co to má ještě do budoucna umět?
+Vývoj GIS.labu ještě ani zdaleka není u konce. Nabízené portfolio se má do budoucna dělit na čtyři základní služby - přístup k PostGIS databázi, publikaci dat pomocí webových mapových služeb (\zk{WMS}, \zk{WFS}), webovou aplikaci a desktopového klienta (více viz kapitola \ref{vision}). 
+
+%Pro snazší administraci uživatelů a jejich přístupových práv ke zmiňovaným službám bylo rozhodnuto vytvořit webové administrátorské rozhraní. Jednodušší přístup  
+
+% Důvod pro moji DP.
+Vývojáři GIS.labu se obecně snaží o co nejvíce uživatelsky přívětivé prostředí, což vedlo k rozhodnutí (potřebě) vytvořit webové administrátorské rozhraní pro snazší správu uživatelů a definování jejich přístupových práv ke zmiňovaným službám. Současný systém administrace přes příkazovou řádku není pro některé správce srozumitelný, navíc neumožňuje žádosti o registraci a o přiřazení přístupových práv přímo ze strany uživatelů. Pro naplnění tohoto požadavku vzniklo zadání této diplomová práce.
+
+% Volba technologií
+Při návrhu webové aplikace bude vyvinuta snaha o její maximální integraci do stávající architektury platformy GIS.lab. Pro vytvoření webového rozhraní byl zvolen framework Django, který využívá, dnes již od GIS.labu oddělená, platforma Gisquick. Důležitou vlastností tohoto frameworku je i to, že je psaný v jazyce Python, což umožní navázání na existující, ale nedokončenou knihovnu pro administraci uživatelů z roku 2015, která by měla nahradit současné bashové skripty. Pro ověření mezi webovou aplikací a LDAP serverem obsahujícím uživatelské informace bude využita některá z dostupných externích knihoven (např. django-python3-ldap, ldap3). 
+% jak nahradit pojem bashové skripty??
+
+% Teoretická část
+V teoretické části bude čtenář především podrobněji seznámen s platformou GIS.lab, jejím budoucím rozšířením a protokolem LDAP.
 
 Rešerše
 
