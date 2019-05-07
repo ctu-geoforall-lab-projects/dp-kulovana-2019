@@ -17,11 +17,8 @@
 
 <h2>Roles</h2>
   {% for group in request|list_groups %}
-  <li>{{  group.name  }}:
-     {% if request.user|has_group:group.name %}
-       True
-     {% else %}
-       False
+    {% if request.user|has_group:group.name %}
+      <li>{{  group.name  }}
      {% endif %}</li>
   {% endfor %}
  
