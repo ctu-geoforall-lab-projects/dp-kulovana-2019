@@ -67,6 +67,7 @@ class CustomUserAdmin(UserAdmin):
         else:
             # add user into LDAP
             sn.save_user(obj, form.cleaned_data["password1"])
+        del sn
 
     def delete_model(self, request, obj):
         """Delete user and its relations from Django and LDAP."""
@@ -76,6 +77,7 @@ class CustomUserAdmin(UserAdmin):
         # delete user and all its relations from LDAP
         sn = SyncDjangoLDAP()
         sn.delete_user(obj)
+        del sn
 
         # delete user from Django
         super().delete_model(request, obj)
@@ -111,6 +113,7 @@ class CustomGroupAdmin(GroupAdmin):
         if not change:
             # add group into LDAP
             sn.save_group(obj, form)
+        del sn
 
     def delete_model(self, request, obj):
         """Delete group and its relations from Django and LDAP."""
@@ -120,6 +123,7 @@ class CustomGroupAdmin(GroupAdmin):
         # delete group and all its relations from LDAP
         sn = SyncDjangoLDAP()
         sn.delete_group(obj)
+        del sn
 
         # delete group from Django
         super().delete_model(request, obj)

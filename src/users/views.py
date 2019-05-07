@@ -34,6 +34,7 @@ class ChangeUser(LoginRequiredMixin, generic.UpdateView):
         # change user in LDAP
         sn = SyncDjangoLDAP()
         sn.change_user(self.object, form)
+        del sn
 
         return super().form_valid(form)
 

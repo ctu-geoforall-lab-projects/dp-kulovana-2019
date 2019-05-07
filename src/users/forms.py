@@ -44,6 +44,7 @@ class CustomUserCreationForm(FieldsRequiredMixin, UserCreationForm):
             # save user to LDAP
             sn = SyncDjangoLDAP()
             sn.save_user(user, self.cleaned_data["password1"])
+            del sn
 
         return user
 
@@ -70,6 +71,7 @@ class CustomAdminPasswordChangeForm(AdminPasswordChangeForm):
             # save new password to LDAP
             sn = SyncDjangoLDAP()
             sn.change_password(self.user, self.cleaned_data["password1"])
+            del sn
 
         return self.user
 
@@ -89,5 +91,6 @@ class CustomPasswordChangeForm(PasswordChangeForm):
             # save new password to LDAP
             sn = SyncDjangoLDAP()
             sn.change_password(self.user, self.cleaned_data["new_password1"])
+            del sn
 
         return self.user

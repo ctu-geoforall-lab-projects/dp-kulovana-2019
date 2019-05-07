@@ -32,6 +32,10 @@ class SyncDjangoLDAP():
 
         self._connection = c
 
+    def __del__(self):
+        """Deletes LDAP connection."""
+        self._connection.unbind()
+
     def change_user(self, obj, form):
         """Change user attributes in LDAP according to Django changes."""
 
