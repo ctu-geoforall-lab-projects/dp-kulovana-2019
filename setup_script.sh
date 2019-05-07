@@ -38,13 +38,15 @@ cp /tmp/dp-kulovana-2019/src/users/forms.py $PROJ_PATH/users/forms.py
 cp /tmp/dp-kulovana-2019/src/users/models.py $PROJ_PATH/users/models.py
 cp /tmp/dp-kulovana-2019/src/users/urls.py $PROJ_PATH/users/urls.py
 cp /tmp/dp-kulovana-2019/src/users/views.py $PROJ_PATH/users/views.py
+cp /tmp/dp-kulovana-2019/src/users/ldap_sync.py $PROJ_PATH/users/ldap_sync.py
 cp -r /tmp/dp-kulovana-2019/src/users/templatetags $PROJ_PATH/users/templatetags
 
 cp /tmp/dp-kulovana-2019/src/project/settings.py $PROJ_PATH/web_console_project/settings.py
 cp /tmp/dp-kulovana-2019/src/project/settings_custom.py $PROJ_PATH/web_console_project/settings_custom.py
 cp /tmp/dp-kulovana-2019/src/project/urls.py $PROJ_PATH/web_console_project/urls.py
 cp /tmp/dp-kulovana-2019/src/project/ldap_auth.py $PROJ_PATH/web_console_project/ldap_auth.py
-cp /tmp/dp-kulovana-2019/src/project/ldap_sync.py $PROJ_PATH/web_console_project/ldap_sync.py
+
+cp -r /tmp/dp-kulovana-2019/src/static $PROJ_PATH/static
 
 # delete github repository
 rm -rf /tmp/dp-kulovana-2019

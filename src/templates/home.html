@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load auth_extras %}
 
-{% block title %}Home{% endblock %}
+{% block title %}GIS.lab user console{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
@@ -25,10 +25,10 @@
      {% endif %}</li>
   {% endfor %}
  
-  <p><a href="{% url 'logout' %}">logout</a></p>
+  <p><a class="button-box" href="{% url 'logout' %}">logout</a></p>
 {% else %}
   <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a> |
-  <a href="{% url 'signup' %}">signup</a>
+  <a class="button-box" href="{% url 'login' %}">login</a>
+  <a class="button-box" href="{% url 'signup' %}">signup</a>
 {% endif %}
 {% endblock %}

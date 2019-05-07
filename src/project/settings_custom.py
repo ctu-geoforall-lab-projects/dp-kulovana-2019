@@ -23,6 +23,11 @@ TEMPLATES = [
     },
 ]
 
+# define global static
+STATICFILES_DIRS = (
+    os.path.join(settings.BASE_DIR, 'static'),
+)
+
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
