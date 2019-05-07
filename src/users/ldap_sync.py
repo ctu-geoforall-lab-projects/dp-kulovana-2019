@@ -51,7 +51,7 @@ class SyncDjangoLDAP():
                                     {'sn': [(ldap3.MODIFY_REPLACE, [f'{obj.last_name}'])]})
             logger.info(f'Account {obj.username} updated with surname {obj.last_name}')
 
-        if 'first_name' or 'last_name' in form.changed_data:
+        if any(cn in form.changed_data for cn in ('first_name', 'last_name')):
             self._connection.modify(f'uid={obj.username},ou=People,dc=gis,dc=lab',
                     {'cn': [(ldap3.MODIFY_REPLACE, [f'{obj.first_name} {obj.last_name}'])]})
             logger.info(f'Account {obj.username} updated with cn {obj.first_name} {obj.last_name}')
