@@ -11,8 +11,8 @@ class SyncDjangoLDAP():
     def __init__(self):
         """Creates the LDAP connection."""
 
-        username = 'username'
-        password = 'password'
+        username = 'cn=admin,dc=gis,dc=lab'
+        password = open('/opt/gislab/secret/gislab_ldap_admin_password.txt').read().rstrip('\n')
 
         auto_bind = ldap3.AUTO_BIND_TLS_BEFORE_BIND
 
