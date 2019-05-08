@@ -37,7 +37,11 @@ class SyncDjangoLDAP():
         self._connection.unbind()
 
     def change_user(self, obj, form):
-        """Change user attributes in LDAP according to Django changes."""
+        """Change user attributes in LDAP according to Django changes.
+
+        :param class obj: custom user
+        :param dict form: form of changed data
+        """
 
         logger.info('SyncDjangoLDAP change_user function')
 
@@ -104,7 +108,11 @@ class SyncDjangoLDAP():
                         logger.info(f'User {obj.username} is a superuser')
 
     def change_password(self, obj, new_password):
-        """Change user password in LDAP according to Django changes."""
+        """Change user password in LDAP according to Django changes.
+
+        :param class obj: custom user
+        :param str new_password: user's new password
+        """
 
         logger.info('SyncDjangoLDAP change_password function')
 
@@ -114,7 +122,11 @@ class SyncDjangoLDAP():
         logger.info(f'Account {obj.username} updated with password {new_password}')
 
     def save_user(self, obj, password):
-        """Add new user into LDAP."""
+        """Add new user into LDAP.
+
+        :param class obj: custom user
+        :param str password: user's password
+        """
 
         logger.info('SyncDjangoLDAP save_user function')
 
@@ -135,7 +147,10 @@ class SyncDjangoLDAP():
         logger.info(f'Successfully added user {obj.username} to LDAP')
 
     def delete_user(self, obj):
-        """Delete user from LDAP."""
+        """Delete user from LDAP.
+
+        :param class obj: custom user
+        """
 
         logger.info('SyncDjangoLDAP delete_user function')
 
@@ -151,7 +166,11 @@ class SyncDjangoLDAP():
         logger.info(f'Successfully deleted user {obj.username} from LDAP')
 
     def save_group(self, obj, form):
-        """Add new group into LDAP."""
+        """Add new group into LDAP.
+
+        :param class obj: group
+        :param dict form: form of changed data
+        """
 
         logger.info('SyncDjangoLDAP save_group function')
 
@@ -165,7 +184,10 @@ class SyncDjangoLDAP():
         logger.info(f'Successfully added group {obj.name} to LDAP')
 
     def delete_group(self, obj):
-        """Delete group from LDAP."""
+        """Delete group from LDAP.
+
+        :param class obj: group
+        """
 
         logger.info('SyncDjangoLDAP delete_group function')
 
@@ -193,7 +215,13 @@ class SyncDjangoLDAP():
         logger.info(f'Successfully deleted group {obj.name} from LDAP')
 
     def _ldap_group_membership(self, obj, group):
-        """Returns whether user belongs to a selected group in LDAP.."""
+        """Returns whether user belongs to a selected group in LDAP.
+
+        :param class obj: custom user
+        :param class group: group
+
+        :return True/False
+        """
 
         # check if user is in the LDAP group
         SEARCH_BASE_GROUPS = "ou=groups,dc=gis,dc=lab"
