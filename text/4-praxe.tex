@@ -1,9 +1,10 @@
-\chapter{Správa uživatelů}
+\chapter{Administrátorské rozhraní}
 \label{4-praxe}
 
 \section{Současný postup přes command line}
 
-\section{Webové admin a user rozhraní}
+
+\section{Webové administrátorské rozhraní}
 spíš z technického hlediska a implementace
 (z uživatelského pak jako příloha)
 
@@ -16,20 +17,7 @@ Adresářová struktura projektu:
 % např. forest: https://tex.stackexchange.com/questions/5073/making-a-simple-directory-tree
 % https://tex.stackexchange.com/questions/328886/making-a-directory-tree-of-folders-and-files/328890
 \dirtree{%
-.1 web\_admin\_console.
-	.2 accounts.
-		.3 templatetags.
-			.4 \_\_init\_\_.py.
-			.4 auth\_extras.py.
-		.3 \_\_init\_\_.py.
-		.3 admin.py.
-		.3 apps.py.
-		.3 forms.py.
-		.3 ldap\_sync.py.
-		.3 models.py.
-		.3 tests.py.
-		.3 urls.py.
-		.3 views.py.			
+.1 web\_admin\_console.			
 	.2 project.
 		.3 \_\_init\_\_.py.
 		.3 ldap\_auth.py.
@@ -47,14 +35,46 @@ Adresářová struktura projektu:
 		.3 password\_change.html.
 		.3 signup.html.
 		.3 user\_change.html.
+	.2 users.
+		.3 templatetags.
+			.4 \_\_init\_\_.py.
+			.4 auth\_extras.py.
+		.3 \_\_init\_\_.py.
+		.3 admin.py.
+		.3 apps.py.
+		.3 forms.py.
+		.3 ldap\_sync.py.
+		.3 models.py.
+		.3 tests.py.
+		.3 urls.py.
+		.3 views.py.
 	.2 db.sqlite3.
 	.2 manage.py.
     }
 % popsat jen ty nejdůležitější soubory
 
+
+\subsubsection{project}
+
+\subsubsection{templates}
+Složka \textit{templates} obsahuje šablony, psané v \zk{HTML}, které umožňují vypisovat vybraná data z modelů do prohlížeče. Cesta k adresáři musí být registrována v souboru \texttt{settings.py} v hodnotě \texttt{DIRS} u položky \texttt{TEMPLATES}.
+
+{{ variables }}
+{{ variable|filter }}
+- custom templatetags
+
+popsat zbylá html
+
+Django funguje na principu dědičnosti. Bázovou šablonou je \textit{base.html}. Vložením textu \texttt{\{\% extends "base.html" \%\}} na začátek jiné šablony, např. \textit{child.html}, je nejdříve načtena šablona \textit{base.html}, definující základní bloky, a až následně je k nim přidán obsah \textit{child.html}. Tímto způsobem jsou sníženy duplicity v jednotlivých šablonách. 
+
+Složka \textit{static} umístěná v hlavním adresáři projektu obsahuje soubor \textit{styles.css}, který popisuje způsob zobrazení elementů, které jsou součástí jednotlivých šablon uživatelské konzole. To je umožněno načtením tohoto souboru pomocí \texttt{\{\% load static \%\}} do bázové šablony. K vytvoření designu byly použity kaskádové style (\zk{CSS}).
+
+\subsubsection{users}
+
 \subsubsection{db.sqlite3}
 % https://www.tablesgenerator.com/latex_tables
 
+Pro vývoj byla využita implicitní databáze Djanga SQLite. 
 Z hlediska uživatelů a rolí jsou důležité především tři tabulky \textit{auth\_group}, \textit{users\_customuser} a \textit{users\_customuser\_groups}. 
 
 Tabulka \textit{auth\_group} obsahuje pouze názvy existujících rolí.
@@ -114,14 +134,6 @@ type & integer & integer & integer \\ \bottomrule
 \caption{Hlavička tabulky users\_customuser\_groups}
 \label{tab:users-customuser-groups}
 \end{table}
-
-
-\subsubsection{accounts}
-
-\subsubsection{project}
-
-\subsubsection{templates}
-+ static
 
 \subsection{problémy při zpracování}
 

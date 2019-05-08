@@ -29,6 +29,9 @@ https://github.com/etianen/django-python3-ldap/blob/master/README.rst
 \subsection{ldap3}
 https://ldap3.readthedocs.io/welcome.html
 
+
+\newpage
+
 \section{Python}
 
 \begin{figure}[H] \centering
@@ -93,6 +96,8 @@ Hlavním cílem Djanga je usnadnit tvorbu komplexních, databází řízených w
 \item controller (řadič) - reakce na žádosti a zajištění změn v pohledu nebo v modelu
 \end{itemize}
 
+Poslední vydanou stabilní verzí v době zpracování bylo Django 2.1 a veškerý další popis uvedený níže platí pro tuto verzi.
+
 Frameworky mají snahu co největší množství práce automatizovat a tak při vytvoření projektu pomocí příkazu:
 
 \begin{center}
@@ -116,6 +121,7 @@ vznikne automaticky jeho základní kostra, která slouží jako podstata již f
 Soubor \textit{\_\_init\_\_.py} dává Pythonu najevo, že s adresářem, v němž se soubor nachází, má být zacházeno jako s balíčkem modulů Pythonu. Jedná se o prázdný soubor, který se obvykle nijak nemění.
 
 \subsubsection{settings.py}
+\label{settings}
 Soubor \textit{settings.py} skrývá nastavení Django projektu, např. jakým způsobem má probíhat autentizace, kde jsou umístěné další potřebné soubory či informace o použitých databázích a registrovaných aplikacích.
 
 \subsubsection{urls.py}
@@ -137,12 +143,6 @@ Pro vývoj aplikace lze použít odlehčený webový server Djanga, na němž m�
 
 Standardně se vývojový server spouští na interní \zk{IP} adrese a portu 8000. V případě, že je třeba zobrazovat webové stránky mimo stroj, na němž server běží, lze nastavit viditelnost a odlišný port serveru přidáním parametru \texttt{0:8080}. V takové situaci je stránka dostupná odkudkoliv při zadání adresy nastavené v proměnné \texttt{ALLOWED\_HOSTS} v souboru \textit{settings.py} a zvoleného portu.
 
-Do projektu lze přidávat webové aplikace, jedna aplikace může být součástí více projektů. Pro její vytvoření lze užít konzolový nástroj:
-
-\begin{center}
-\texttt{python manage.py startapp nazev\_aplikace}
-\end{center}
-
 Pro práci s databází jsou nezbytné dva základní příkazy:
 
 \begin{center}
@@ -159,7 +159,7 @@ který tyto změny aplikuje do databáze. V případě, že databáze ještě ne
 
 Migrace v Djangu funguje podobně jako verzovací systémy - \texttt{makemigrations} odpovídá příkazu \texttt{commit} a \texttt{migrate} pak obdobně jako \texttt{push} tyto změny propíše do databáze.
 
-Poslední, ale neméně důležitou funkcí \textit{manage.py} je spouštění jednotkových testů.
+Poslední z významných funkcí \textit{manage.py} je spouštění jednotkových testů.
 
 \subsubsection{db.sqlite3}
 Výchozí databází v Djangu je relační databáze SQLite. Obsahuje informace o jednotlivých modelech a vztazích mezi nimi.
@@ -167,9 +167,29 @@ Výchozí databází v Djangu je relační databáze SQLite. Obsahuje informace 
 % https://docs.djangoproject.com/en/2.2/topics/migrations/#sqlite
 SQLite nemá vhodně implementovánu podporu změn, Django ji proto nahrazuje postupem, kdy vytvoří novou tabulku s novým schématem, data z původní tabulky překopíruje do nové, starou smaže a novou přejmenuje podle prvotní. Proto se nedoporučuje tuto databázi používat v produkci, obzvlášť v případě většího množství dat a častých změn.
 
-\subsection{aplikace}
-popis aplikací v Djangu
+Kromě SQLite Django oficiálně podporuje databáze PostgreSQL, MySQL a Oracle.
 
+\subsection{Webové aplikace}
+Do projektu lze přidávat webové aplikace, jedna aplikace může být součástí více projektů. Pro její vytvoření lze užít konzolový nástroj:
+
+\begin{center}
+\texttt{python manage.py startapp nazev\_aplikace}
+\end{center}
+
+Implicitní struktura aplikace je vždy stejná:
+
+\begin{itemize}
+\item \texttt{\_\_init\_\_.py} - určuje aplikaci jako balíček Pythonu
+\item \texttt{admin.py} - umožňuje registraci datových modelů
+\item \texttt{apps.py} - definuje název aplikace??
+\item \texttt{models.py} - umožňuje tvorbu datových modelů
+\item \texttt{tests.py} - umožňuje tvorbu jednotkových testů
+\item \texttt{views.py} - umožňuje definování pohledových funkcí
+\end{itemize}
+
+Každou aplikaci, která má být součástí projektu, je třeba zaregistrovat v souboru \textit{settings.py} (viz \ref{settings}) v položce \texttt{INSTALLED\_APPS}.
+
+\newpage
 \section{Docker}
 
 % kouknout na licenci (můžu používat??)
