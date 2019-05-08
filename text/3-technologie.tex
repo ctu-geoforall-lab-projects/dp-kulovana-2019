@@ -21,16 +21,13 @@ Protokol LDAP vychází ze standardu X.500, jehož je odlehčenou variantou. Ně
       \label{fig:ldap}
   \end{figure}
 
-OpenLDAP je otevřená (open-source) implementace protokolu \zk{LDAP}.
+OpenLDAP je otevřená (open-source) implementace protokolu \zk{LDAP} vyvíjená pod (hlavičkou) OpenLDAP Project. OpenLDAP je distribuován pod vlastní licencí OpenLDAP Public License.\footnote{http://www.openldap.org/software/release/license.html}
 
 \subsection{django-python3-ldap}
 https://github.com/etianen/django-python3-ldap/blob/master/README.rst
 
 \subsection{ldap3}
 https://ldap3.readthedocs.io/welcome.html
-
-
-\newpage
 
 \section{Python}
 
@@ -41,18 +38,15 @@ https://ldap3.readthedocs.io/welcome.html
       \label{fig:python}
   \end{figure}
   
+% (3) https://docs.python.org/3/faq/general.html#general-python-faq
+
 Python je vysokoúrovňový, interpretovaný programovací jazyk. Podporuje
 procedurálně i objektově orientované programování, je výkonný, zároveň
 má velmi jednoduchou a čistou syntax. V ostatních jazycích je
 odsazování řádků doporučeno z hlediska přehlednosti, u Pythonu je
-základním stavebním kamenem a je povinné.
+základním stavebním kamenem a je povinné.\cite{Kulovana, 2017}
 
-Guido van Rossum, autor první verze Pythonu vydané v roce 1991, se
-rozhodl vyřešit nedostatečnost jazyků, které byly používány v jeho
-zaměstnání, a napsat jazyk splňující jeho potřeby. Při vývoji se
-inspiroval především v jazycích ABC a~Modula-3. Jednou ze snah bylo
-vytvoření jazyka otevřeného dalším rozšířením a~propojením s jinými
-jazyky (např. C++). Dnes je Python vyvíjen jako open source projekt
+Dnes je Python vyvíjen jako open source projekt
 pod záštitou neziskové organizace Python Software Foundation
 (\zk{PSF}). Je distribuován pod licencí \zk{PSF}, která je
 kompatibilní s \zk{GPL}. Je možné ho nainstalovat na běžné platformy
@@ -65,11 +59,20 @@ aplikace. Právě pro tyto možnosti, univerzálnost, přehlednost kódu a
 výkonnost z něj udělaly programovací jazyk, který je mezi začátečníky ve
 velké oblibě. Během krátké doby v~něm funkční skript zvládne napsat
 každý.
-  
-% (3) https://docs.python.org/3/faq/general.html#general-python-faq
 
-\newpage
-  
+--
+
+%https://wiki.python.org/moin/Python2orPython3#Which_version_should_I_use.3F
+% http://python-notes.curiousefficiency.org/en/latest/python3/questions_and_answers.html#when-can-we-expect-python-2-to-be-a-purely-historical-relic
+
+Python v současnosti existuje ve dvou hlavních verzích - Python 2 a Python 3. Python 3.0 byl vydán v roce 2008\footnote{https://www.python.org/downloads/} a není zpětně kompatibilní s verzí Python 2. Hlavním důvodem pro takto zásadní změnu bylo rozhodnutí Guido van Rossuma, zakladatele jazyku Python, očistit Python 2.x od mnoha problémů pořádně v jednom kroku. 
+
+Největšími změnami jsou upravení tradičních tříd a oddělení abstrakcí \texttt{řetězec} a \texttt{posloupnost bytů}. Textový řetězec (\texttt{str}) je nově převeden ve výchozím nastavení na typ unicode, což vytváří konzistentnější a spolehlivější prostředí. Změny doznalo chování operátoru dělení \texttt{/} celých čísel. Výsledkem je číslo s plovoucí desetinnou čárkou, na rozdíl od předchozí verze, která vracela celé číslo (ve verzi 3.x dostupné pod operátorem \texttt{//}). Mezi nejviditelnější novinky pro běžného uživatele je přechod od příkazu \texttt{print} k funkci \texttt{print()}. 
+
+Python 3 je obecně přívětivější k učení nových uživatelů a je považován za budoucnost tohoto jazyka. Stále však existuje mnoho programů, jež fungují na poslední verzi Python 2.7 vydané v roce 2010\footnote{https://www.python.org/downloads/}, která již nedostává žádné velké aktualizace. Důvody jsou různé - daný projekt byl vyvíjen v Pythonu 2 a nejsou dostatečné kapacity na jeho přechod na novější verzi; na některých operačních systémech není Python 3 nainstalovaný a uživatelé nemají vždy práva si ho sami doinstalovat; existuje potřeba využívat externí knihovnu, která podporuje pouze Python 2 a není triviální ji převést do Pythonu 3. 
+
+Poslední vydanou stabilní verzí je Python 3.7.\footnote{https://www.python.org, květen 2019} 
+
 \section{Django}
 
 \begin{figure}[H] \centering
@@ -78,9 +81,95 @@ každý.
 \href{https://static.djangoproject.com/img/logos/django-logo-positive.png}{Djangoproject.com})}
       \label{fig:django}
   \end{figure}
-  
-\newpage  
-  
+
+% http://www.moreware.org/books/The%20Definitive%20Guide%20to%20Django.pdf
+
+Django je vysokoúrovňový webový framework napsaný v jazyce Python. Je udržované organizací Django Software Foundation (\zk{DSF}), bezplatné a vydané pod open-source licencí \zk{BSD}. Název získalo po jazzovém kytaristovi Djangovi Reinhardtovi.
+
+Hlavním cílem Djanga je usnadnit tvorbu komplexních, databází řízených webových aplikací. Pro tento účel se řídí zásadou oddělení zodpovědností (angl. Separation of concerns) a volně navazuje na architekturu Model-view-controller (\zk{MVC}). Ta sestává ze tří volně propojených komponent:
+\begin{itemize}
+\item model (model) - reprezentace dat, k nimž aplikace přistupuje
+\item view (pohled) - uživatelské rozhraní
+\item controller (řadič) - reakce na žádosti a zajištění změn v pohledu nebo v modelu
+\end{itemize}
+
+Frameworky mají snahu co největší množství práce automatizovat a tak při vytvoření projektu pomocí příkazu:
+
+\begin{center}
+\texttt{django-admin startproject nazev\_projektu}
+\end{center}
+
+vznikne automaticky jeho základní kostra, která slouží jako podstata již fungující Django aplikace.
+
+\dirtree{%
+.1 project.			
+	.2 mysite.
+		.3 \_\_init\_\_.py.
+		.3 settings.py.
+		.3 urls.py.
+		.3 wsgi.py.
+	.2 db.sqlite3.
+	.2 manage.py.
+}
+
+\subsubsection{\_\_init\_\_.py}
+Soubor \textit{\_\_init\_\_.py} dává Pythonu najevo, že s adresářem, v němž se soubor nachází, má být zacházeno jako s balíčkem modulů Pythonu. Jedná se o prázdný soubor, který se obvykle nijak nemění.
+
+\subsubsection{settings.py}
+Soubor \textit{settings.py} skrývá nastavení Django projektu, např. jakým způsobem má probíhat autentizace, kde jsou umístěné další potřebné soubory či informace o použitých databázích a registrovaných aplikacích.
+
+\subsubsection{urls.py}
+\textit{urls.py} obsahuje \zk{URL} cesty pro vytvořený Django projekt, v podstatě se jedná o jakýsi rejstřík stránky. Implicitně obsahuje cestu k vestavěné administrátorské konzoli. Při propojení s Django aplikacemi jsou sem přidány další \zk{URL} adresy.
+
+\subsubsection{wsgi.py}
+\zk{WSGI} je specifikace popisující komunikaci mezi webovým serverem a webovou aplikací nebo frameworkem v jazyce Python. Jedná se o primární nástroj nasazení programů v Djangu. Soubor \textit{wsgi.py} se v základu skládá z jednoduché \zk{WSGI} konfigurace, již je možno podle potřeby dále upravovat.
+
+\subsubsection{manage.py}
+% http://www.moreware.org/books/The%20Definitive%20Guide%20to%20Django.pdf
+% https://docs.djangoproject.com/en/2.2/topics/migrations/
+Nástroj pro příkazový řádek \textit{manage.py} umožňuje spravovat Django projekt. Tento soubor není po vytvoření nijak upravován.
+
+Pro vývoj aplikace lze použít odlehčený webový server Djanga, na němž může autor okamžitě začít budovat aplikaci, aniž by byla vyžadována konfigurace produkčního serveru. Vývojový server provádí kontrolu kódu a automaticky se po každé uložené změně znovu načte, bez nutnosti restartu. Tento server se spouští příkazem:
+
+\begin{center}
+\texttt{python manage.py runserver 0:8080}
+\end{center}
+
+Standardně se vývojový server spouští na interní \zk{IP} adrese a portu 8000. V případě, že je třeba zobrazovat webové stránky mimo stroj, na němž server běží, lze nastavit viditelnost a odlišný port serveru přidáním parametru \texttt{0:8080}. V takové situaci je stránka dostupná odkudkoliv při zadání adresy nastavené v proměnné \texttt{ALLOWED\_HOSTS} v souboru \textit{settings.py} a zvoleného portu.
+
+Do projektu lze přidávat webové aplikace, jedna aplikace může být součástí více projektů. Pro její vytvoření lze užít konzolový nástroj:
+
+\begin{center}
+\texttt{python manage.py startapp nazev\_aplikace}
+\end{center}
+
+Pro práci s databází jsou nezbytné dva základní příkazy:
+
+\begin{center}
+\texttt{python manage.py makemigrations}
+\end{center}
+
+který vytváří jednotlivé migrační soubory založené na změnách provedených v modelech Djanga a 
+
+\begin{center}
+\texttt{python manage.py migrate}
+\end{center}
+
+který tyto změny aplikuje do databáze. V případě, že databáze ještě neexistuje, tak ji automaticky vytvoří.
+
+Migrace v Djangu funguje podobně jako verzovací systémy - \texttt{makemigrations} odpovídá příkazu \texttt{commit} a \texttt{migrate} pak obdobně jako \texttt{push} tyto změny propíše do databáze.
+
+Poslední, ale neméně důležitou funkcí \textit{manage.py} je spouštění jednotkových testů.
+
+\subsubsection{db.sqlite3}
+Výchozí databází v Djangu je relační databáze SQLite. Obsahuje informace o jednotlivých modelech a vztazích mezi nimi.
+
+% https://docs.djangoproject.com/en/2.2/topics/migrations/#sqlite
+SQLite nemá vhodně implementovánu podporu změn, Django ji proto nahrazuje postupem, kdy vytvoří novou tabulku s novým schématem, data z původní tabulky překopíruje do nové, starou smaže a novou přejmenuje podle prvotní. Proto se nedoporučuje tuto databázi používat v produkci, obzvlášť v případě většího množství dat a častých změn.
+
+\subsection{aplikace}
+popis aplikací v Djangu
+
 \section{Docker}
 
 % kouknout na licenci (můžu používat??)
