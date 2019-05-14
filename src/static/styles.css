@@ -14,6 +14,37 @@ h2 {
   color: #fff;
 }
 
+form label {
+	width: 20%;
+	display: inline-block;
+	text-align: right;
+	vertical-align: top;
+	padding-right: 5px;
+}
+
+form .helptext {
+	display: inline-block;
+	margin-top: 5px;
+	padding-left: calc(20% + 10px);
+}
+
+form ul {
+	/* same as for .helptext, but including width of the bullet */
+	padding-inline-start: calc(20% + 30px);
+}
+
+form input,
+form textarea {
+	width: calc(78% - 5px);
+}
+
+form #id_password strong {
+	padding-left: calc(20% + 10px);
+	/* hack for messy django-generated html */
+	display: block;
+    margin-top: -34px;	
+}
+
 button, .button-box {
 	text-decoration: none;
 	outline: none;
