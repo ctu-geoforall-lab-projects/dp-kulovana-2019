@@ -3,34 +3,54 @@
 
 % http://gislab-npo.github.io/gislab/index.html
 
+% ML: GISová bych vynechal (detail)
 Open-source GISová platforma GIS.lab slouží k rychlému a jednoduchému
 nasazení centrálně řízené GIS infrastruktury v lokální síti (LAN),
+% skloňování
 data centra nebo cloudové služby. Poskytuje celistvý soubor
+% ML: neplaceny neni zcela podstatne, ale melo by zaznit (poznamka)
 neplaceného GIS softwaru integrovaného do jednoho systému, který je
 okamžitě připraven k použití.
- 
+% ML: nevim, zda to je popsano dale, ale chtelo by nacrtnout rozsah
+% softwarovych komponent od DB pres analyticke nastroje az po webove
+% sluzby a publikacni platformu (Gisquick)
+
+% ML: spravce systemu
 Všechny použité technologie jsou plně pod kontrolou správců, náklady
 na nasazení a vlastnictví takovéhoto komplexního řešení jsou sníženy
 na absolutní minimum. Díky tomu je možné GIS.lab využít v oblastech a
+% ML nasazeni proprietarnich techno...
 podmínkách, kde by aplikace jiné technologie nebyla cenově dostupná či
+%% ML: ty zony zasazene prirodni katastrofou bych vynechal (to je asi
+%% prevzato z dokumentace), spis bych pridal rozvojove zeme
 technicky možná. Příkladem mohou být zóny zasažené přírodní
 katastrofou či sféra školství a vzdělávacích institucí.
 
 % Co to už umí?
+
+% ML: mobilniho klienta nezminuj, ten se dal nevyviji. Mluvit o
+% Gisquicku jako o webovem klientovi GIS.labu take neni presne, pote
+% co se osamostatnil. Gisquick jako publikacni platforma muze byt
+% zpetne integrovana do GIS.labu...
 GIS.lab je dostupný jako desktopový, webový a mobilní klient. Webový a
 mobilní klient jsou přístupné díky samostatné platformě Gisquick,
 která je automaticky integrovaná i do desktopové verze. GIS.lab
+% ML: nejsirsi skalu
 Desktop obsahuje nejvíce funkcionalit, z nichž mezi nejdůležitější
+% ML: lze ukladam v souborovem systemu anebo v PostGIS databazi
 patří ukládání prostorově i neprostorově orientovaných dat a jejich
+% ML: sklonovani
 sdílení, tvorba a analýza vektorových, rastrových i tabulkových dat
 nebo rychlé vytváření kartografických výstupů.
 
 % Co to má ještě do budoucna umět?
+% ML: ono jde v podstate o umozneni pristupu k jednotlivym komponentam mimo desktopoveho klienta
 Vývoj GIS.labu ještě ani zdaleka není u konce. Nabízené portfolio se
 má do budoucna dělit na čtyři základní služby - přístup k PostGIS
 databázi, publikaci dat pomocí webových mapových služeb (\zk{WMS},
 \zk{WFS}), webovou aplikaci a desktopového klienta (více viz kapitola
 \ref{vision}).
+% ML: Do budoucna si dokazu predstavit dalsi sluzby typu vypocetniho serveru na bazi WPS a pod.
 
 %Pro snazší administraci uživatelů a jejich přístupových práv ke zmiňovaným službám bylo rozhodnuto vytvořit webové administrátorské rozhraní. Jednodušší přístup  
 
@@ -45,6 +65,7 @@ přístupových práv přímo ze strany uživatelů. Pro naplnění tohoto
 požadavku vzniklo zadání této diplomová práce.
 
 % Volba technologií
+% ML: kombinace budouciho a minuleho casu
 Při návrhu webové aplikace bude vyvinuta snaha o její maximální
 integraci do stávající architektury platformy GIS.lab. Pro vytvoření
 webového rozhraní byl zvolen framework Django, který využívá, dnes již
@@ -56,9 +77,11 @@ ověření mezi webovou aplikací a LDAP serverem obsahujícím uživatelské
 informace bude využita některá z dostupných externích knihoven
 (např. django-python3-ldap, ldap3).
 % jak nahradit pojem bashové skripty??
+% ML: asi shellove (o moc lepsi to ale neni), https://cs.wikipedia.org/wiki/Shellov%C3%BD_skript
 
 % Teoretická část
 V teoretické části bude čtenář především podrobněji seznámen s
+% ML: jiz zde bych naznacit k cemu vubec LDAP slouzi (v jedne kratke vete)
 platformou GIS.lab, jejím budoucím rozšířením a protokolem LDAP.
 
 Rešerše
