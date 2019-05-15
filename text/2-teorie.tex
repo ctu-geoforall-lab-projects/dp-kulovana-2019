@@ -16,9 +16,13 @@
 
 GIS.lab je nástroj pro jednoduché a rychlé nasazení (deployment)
 funkční, centrálně spravované \zk{GIS} infrastruktury v jednotném
+% ML: sklonovani
 prostředí lokální sítě (\zk{LAN}), data centra nebo cloudové
 služby. Jedná se o technologii, která poskytuje komplexní soubor
-otevřených gisových softwarových nástrojů integrovaných do jednoho
+otevřených GISových softwarových nástrojů integrovaných do jednoho
+% ML: privetivost je vzdy subjektivni, podstatna je bezesva integrace,
+% open source nastroje jsou casto velmi heterogeni, GIS.lab je pokus
+% jim dat celistvy podvozek
 uživatelsky přívětivého systému, jenž vyžaduje minimální náklady na
 pořízení a údržbu.
 
@@ -33,11 +37,18 @@ K největším výhodám této platformy patří maximálně automatizovaná
 instalace či rychlé nasazení pomocí GIS.lab Unit (viz
 \ref{gislab-unit}), jejichž výsledkem je plně funkční a vysoce výkonný
 nástroj, bez nutnosti dalšího složitého nastavení. Přizpůsobení
+% ML: specifickym potrebam
+% ML: jako priklad pod carou lze uvest upravy pro skupinu GISMentors, https://github.com/GISMentors/gislab-customization
 unikátním potřebám zákazníka je však také možné. Výpočetní kapacitu je
+% ML: nutno dovystetlit, GIS.lab server (master) a klienti (nodes)
+% tvori lokální počitacovou sit, jakysi cluster
 možné sdílet přes všechny stroje. Veškeré počítače v síti, uživatelské
+% ML: pocitace v siti je zavadejici, spis desktopovy klienti GIS.labu...
 účty i zálohy jsou centrálně spravované.
 
+% ML: Z hlediska GIS infrastrukury a jeji komplexnosti...
 Z hlediska funkcionalit jsou nejzásadnější ukládání prostorově i
+% ML: soubor vs. DB
 neprostorově orientovaných dat a jejich sdílení, tvorba a analýza
 vektorových, rastrových i tabulkových dat nebo rychlé vytváření
 kartografických výstupů.
@@ -55,16 +66,24 @@ vykoupen dočasnou nedostupností původního \zk{OS}.
 	\label{fig:gislab-rezim}
 \end{figure}
 
+% ML: najednou mluvis o tenkem klientovi, bez vysvetleni. Jak jsem
+% psal, z puvodne zamysleneho tenkeho klienta se stala spise
+% publikacni platforma. Do jiste miry se ale asi da porad mluvit o
+% jakesi forme tenkeho klienta, jeho mira funkcionality je ale s
+% porovnani s desktopem velmi mala, v dalsi casti odstance to je
+% vysvetleno, asi OK, ten zacatek odstavce ale zni divne
 Tlustý klient poskytuje desktopové prostředí bez zádrhelů, které se
 mohou vyskytovat u tenkého klienta. Jeho využití však není primárně
 zamýšleno v tradičním pojetí desktopu jako jediného klienta, ale spíše
 jako jakési specializované klientské rozhraní poskytující nástroje ze
 světa desktopu.
 
-Konfiguraci a nasazení GIS.labu řídí platforma Ansible, nasazení ve
+% ML: vystelit pojmy v poznamce pod carou (pokud dale v textu neni,
+% jinak dodat reference)
+Konfiguraci a nasazení GIS.labu řídí platforma Ansible. Nasazení ve
 virtuálním režimu umožňuje Vagrant a VirtualBox.
 
-GIS.lab po nasazení sestává z jednoho stroje, který zastává roli
+GIS.lab se po nasazení sestává z jednoho stroje, který zastává roli
 hlavního uzlu (server), a k němu připojeného množství dalších počítačů
 (klientů). Pro hlavní uzel je vyžadován stroj s operačním systémem
 Linux, požadavky na klientské počítače nejsou téměř žádné - nemusí
@@ -79,25 +98,31 @@ síťového přepínače (switch).
 	\label{fig:gislab-architecture}
 \end{figure}
 
+% ML: mobilni bych vynechal
 S pomocí integrované platformy Gisquick (viz \ref{gisquick}) podporuje
 GIS.lab kromě desktopového i webového a mobilního klienta.
 
-\subsubsection{GIS.lab unit}
+\subsubsection{GIS.lab Unit}
 \label{gislab-unit}
 %http://gislab-npo.github.io/gislab/pages/gislab-unit
 Zařízení s názvem GIS.lab Unit je přenosné hardwarové řešení
 obsahující systém GIS.lab připravený k okamžitému zapojení a nasazení
 ve zvolené síti. Jedná se o krabičku s rozměry přibližně 11 x 11 x 4
 cm, procesorem Intel Haswell, SSD diskem a 16 GB RAM. Maximální
+% ML: asi dovysetli, souvisi to s vyukou, fotka ucebny http://gismentors.cz/wp-content/uploads/2018/12/DSC_0051.jpg
 testované množství klientských počítačů je 20.
+% ML: nekde by bylo dobre zminit, ze server (master) lze provozovat na
+% jakemkoliv hardware, na ktery je mozne nainstalovat Ubuntu.
 
 \begin{figure}[H] \centering
+  % ML: mozna lepsi kandidat, http://gismentors.cz/wp-content/uploads/2018/12/DSC_0043.jpg
     \includegraphics[width=350pt]{./pictures/gislab-unit.png}
     \caption[GIS.lab Unit]{GIS.lab Unit (zdroj:
 	\href{https://github.com/gislab-npo/gislab-doc/blob/master/img/general/gislab-unit.svg}{GIS.lab repozitář})}
     \label{fig:gislab-unit}
 \end{figure}
 
+% ML: konkretne Ubuntu LTS
 GIS.lab Server běží na operačním systému Linux, nasazení spravuje
 platforma Ansible a k ověření a správě uživatelů využívá protokol
 LDAP, přesněji jeho nadstavbu OpenLDAP. Software dostupný po instalaci
@@ -111,6 +136,7 @@ pro uživatele GIS.lab Desktop je uveden v následujícím seznamu:
 \item Video player: VLC
 \item Secure data storage: KeepassX
 \item Database management: PgAdmin, SpatiaLite GUI
+  %% ML: mnohem vic, zda zninovat vlc a pod. https://gislab.readthedocs.io/en/latest/client-layout/index.html#gis-applications
 \item GIS software: QGIS, GRASS GIS
 \item Virtual client support: VirtualBox Guest Additions
 \end{itemize}
