@@ -15,9 +15,86 @@
     \label{fig:admin-current}
   \end{figure}
 
-\section{Současný správa uživatelských účtů}
+\section{Současná správa uživatelských účtů}
 \label{cmd-line}
+% https://github.com/gislab-npo/gislab/tree/314fe436e1b65783d65e61000ca6d3f8ba873b2f/system/admin
 
+Aktuálně probíhá správa uživatelských účtů spouštěním shellových skriptů. Všechny příkazy je nutné spouštět pod právem \textit{sudo}. Některé z nich umožňují použití parametrů, pro část jsou dokonce povinné.
+
+Seznam názvů dostupných skriptů pro GIS.lab administraci vrací příkaz \texttt{gislab-help}. Každý jednotlivý příkaz z tohoto soupisu pak lze spustit s příznakem \texttt{-h}, který zobrazí podrobnější nápovědu. Uživatel se dozví, co skript vykoná a za jakých podmínek, jakým způsobem příkaz zapsat do konzole a získá přehled parametrů, které může či musí použít.
+
+Níže jsou popsány skripty pro vytváření uživatelů a skupin, jejich mazání a pro výpis existujících entit, protože souvisí s funkčností, kterou nabízí nové webové rozhraní. Vedle toho existují i další, např. pro zálohování dat nebo upgrade GIS.lab systému.
+
+%TK: tady u těch popisů nevím, jestli dávat někam přesnou podobu příkazu (gislab-adduser [OPTIONS] username)
+%přímo jako nadpis (\subsubsection{gislab-adduser...}) nebo někam pod něj? nebo to nepsat vůbec?
+%nebo mít u každého konkrétní příkaz: $ sudo gislab-adduser -g User -l GIS.lab -m lab1@gis.lab -p lab lab1 ??
+
+\subsubsection{gislab-adduser}
+\begin{itemize}
+\item [-g] křestní jméno (povinné)
+\item [-l] příjmení (povinné)
+\item [-m] email (povinné)
+\item [-d] popis (nepovinné)
+\item [-p] heslo (nepovinné)
+\item [-s] přidat uživateli status administrátora (nepovinné)
+\item [-a] přidat uživatele do vybraných skupin (nepovinné)
+\end{itemize}
+Tento příkaz má několik příznaků, z nichž část je povinná, část nepovinná. Parametr \texttt{-p} musí být použit jako poslední, těsně před názvem uživatele (username), může však být aplikován v různých obměnách. První variantou je \texttt{-p PASSWORD}, která nastaví heslo na hodnotu PASSWORD. Pokud je použit parametr bez argumentu (\texttt{-p}), uživatel je následně dotázán na heslo. V třetím případě je parametr z příkazu kompletně vynechán a heslo je automaticky vygenerováno. Tedy i přestože parametr patří mezi nepovinné, heslo je vždy po doběhnutí skriptu vytvořeno.
+
+Uživatele lze přidat do více skupin zároveň použitím parametru \texttt{-a} a seznamu skupin oddělených od sebe čárkami. Pokud je k účtu přiřazen status administrátora (superuser), tak takový uživatel může na klientských počítačích spouštět operace pod právem \textit{sudo}.
+
+\subsubsection{gislab-moduser}
+\begin{itemize}
+\item [-a] přidat uživatele do vybrané skupiny
+\item [-A] odebrat uživatele z vybrané skupiny
+\item [-s] přidat uživateli status administrátora
+\item [-S] odebrat uživateli status administrátora
+\item [-m] změnit email
+\item [-p] změnit heslo
+\item [-d] změnit popis
+\end{itemize}
+Upraví jeden či více atributů. Pokud nebyly předtím definovány, tak je vytvoří. Stejně jako při vytváření uživatelského účtu je možné přidávat a odebírat členství ve skupinách hromadně, jsou-li v seznamu a oddělené čárkami. V případě, že je parametr \texttt{-p} uveden bez argumentu, je heslo vygenerováno automaticky.
+
+\subsubsection{gislab-deluser}
+\begin{itemize}
+\item [-b] zazálohovat uživatelská data (nepovinné)
+\item [-f] vynutit proběhnutí tohoto příkazu (nepovinné)
+\end{itemize}
+Smaže uživatelský účet včetně příslušnosti ke skupinám. Pokud je příkaz spuštěn s parametrem \texttt{-f}, proběhne vše okamžitě, v opačném případě musí uživatel ještě jednou potvrdit, že si skutečně přeje účet odstranit.
+
+\subsubsection{gislab-addgroup}
+\begin{itemize}
+\item [-d] popis (nepovinné)
+\end{itemize}
+Vytvoří skupinu.
+
+\subsubsection{gislab-delgroup}
+\begin{itemize}
+\item [-f] vynutit proběhnutí tohoto příkazu
+\end{itemize}
+Smaže skupinu, pokud je prázdná. Existují-li uživatelé, kteří patří do mazané skupiny, vypíše se chybová hláška a skupina zůstane v systému. Nejdříve je potřeba skupinu vyčistit přes \texttt{gislab-moduser} a pak příkaz zopakovat.
+
+Obdobně jako při mazání uživatelského účtu je možné vynutit proběhnutí příkazu bez dalších dotazů. Pokud však zůstali nějací uživatelé ve skupině, je vrácena stejná chyba, která byla popsána výše.
+
+\subsubsection{gislab-listusers}
+\begin{itemize}
+\item [-g] vypsat pouze uživatele zvolené skupiny
+\end{itemize}
+Bez příznaku vypíše seznam všech uživatelů. U každého uživatele jsou uvedeny všechny jeho atributy. S příznakem \texttt{-g nazev\_skupiny} vypíše list uživatelů příslušících této skupině, včetně jejich atributů. Heslo je zobrazeno v šifrované podobě. 
+
+\subsubsection{gislab-listgroups}
+Kromě nápovědy nemá žádné parametry. Vypíše seznam všech skupin a jejich atributů, včetně identifikátorů \textit{uid} uživatelů, kteří do dané skupiny patří. 
+
+Jak \texttt{gislab-listusers}, tak \texttt{gislab-listgroups} vracejí při větším množství záznamů velmi dlouhý seznam, který vypisují do konzole. Zobrazit jen požadovanou část informací umožňuje program grep.
+
+\texttt{\$ sudo gislab-listusers | grep uid:}
+
+\texttt{uid: uid=user01}
+
+\texttt{uid: uid=user02}
+
+%TK: u listusers a listgroups by možná pro lepší orientaci pomohlo přidat obrázky nebo textový výpis, jak vlastně vypadají výsledky, které vrací:
+%dn: uid=gislab,ou=People,dc=gis,dc=lab                                                                                  objectClass: inetOrgPerson                                                                                              objectClass: posixAccount                                                                                               objectClass: shadowAccount                                                                                              uid: gislab                                                                                                             uidNumber: 3000                                                                                                         gidNumber: 3001                                                                                                         homeDirectory: /mnt/home/gislab                                                                                         loginShell: /bin/bash                                                                                                   cn: Administrator GIS.lab (gislab_vagrant_bionic)                                                                       sn: GIS.lab (gislab_vagrant_bionic)                                                                                     givenName: Administrator                                                                                                mail: gislab@gis.lab                                                                                                    userPassword:: e1NTSEF9Y0JBWUdMcVgxNTdweVJreXdxZzJRaUlpTE9CaHNaSTU=                                                     description: fjdsklfjdsl 
 
 \section{Webové administrátorské rozhraní}
 spíš z technického hlediska a implementace
