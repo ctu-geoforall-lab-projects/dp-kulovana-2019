@@ -148,18 +148,33 @@ Adresářová struktura projektu:
 
 \subsubsection{project}
 
-\subsubsection{templates}
-Složka \textit{templates} obsahuje šablony, psané v \zk{HTML}, které umožňují vypisovat vybraná data z modelů do prohlížeče. Cesta k adresáři musí být registrována v souboru \texttt{settings.py} v hodnotě \texttt{DIRS} u položky \texttt{TEMPLATES}.
+\subsubsection{templates, templatetags, static}
+Složka \textit{templates} obsahuje šablony (templates), psané v jazyce \zk{HTML}, které umožňují vypisovat vybraná data z modelů do prohlížeče. Cesta k adresáři musí být registrována v souboru \textit{settings.py} v proměnné \texttt{DIRS} u položky \texttt{TEMPLATES}.
 
-{{ variables }}
-{{ variable|filter }}
-- custom templatetags
+Pro přístup k proměnným a některým funkcím Pythonu slouží složené závorky. V případě proměnných se jedná o závorky dvojité: \texttt{\{\{ variable \}\}}. 
 
-popsat zbylá html
+%popis sablon
+Django funguje na principu dědičnosti. Bázovou šablonou je \textit{base.html}. Vložením textu \texttt{\{\% extends "base.html" \%\}} na začátek jiné šablony, např. \textit{child.html}, je nejdříve načtena šablona \textit{base.html}, definující základní bloky, a až následně je k nim přidán obsah \textit{child.html}. Tímto způsobem jsou omezeny duplicity v jednotlivých šablonách.
 
-Django funguje na principu dědičnosti. Bázovou šablonou je \textit{base.html}. Vložením textu \texttt{\{\% extends "base.html" \%\}} na začátek jiné šablony, např. \textit{child.html}, je nejdříve načtena šablona \textit{base.html}, definující základní bloky, a až následně je k nim přidán obsah \textit{child.html}. Tímto způsobem jsou sníženy duplicity v jednotlivých šablonách. 
+U tohoto projektu jsou například v bázové šabloně definovány navigační prvky společné pro níže uvedené šablony, které z ní všechny dědí. Na každé stránce se v horní části zobrazuje logo GIS.labu, které po kliknutí přesměruje uživatele na hlavní stránku \textit{home.html}. V případě přihlášeného uživatele se navíc zobrazuje tlačítko pro odhlášení.
 
-Složka \textit{static} umístěná v hlavním adresáři projektu obsahuje soubor \textit{styles.css}, který popisuje způsob zobrazení elementů, které jsou součástí jednotlivých šablon uživatelské konzole. To je umožněno načtením tohoto souboru pomocí \texttt{\{\% load static \%\}} do bázové šablony. K vytvoření designu byly použity kaskádové style (\zk{CSS}).
+\textit{signup.html} obsahuje jednoduchý interaktivní formulář s informacemi, která pole jsou povinná pro platné vyplnění a jaké podmínky musí splňovat. V situaci, kdy je registrace provedena správně, je uživatel přesměrován na přihlašovací stránku, v opačném případě je zobrazena chybová hláška a potřebná data je nutné opravit, resp. doplnit.
+
+Template \textit{login.html} sestává z jednoduchého formuláře pro vyplnění uživatelského jména a hesla. Při neúspěšném pokusu je vypsána chyba, po zdárném vyplnění je uživatel přesměrován na domovskou stránku \textit{home.html}.
+
+První šablona, s níž se uživatel při zobrazení hlavní stránky setká, je \textit{home.html}. Ta ukazuje rozdílné výsledky nepřihlášenému uživateli a přihlášenému. V prvním případě je dostupný rozcestník, který jej navede na stránky přihlášení či k registraci. V druhém případě, tedy pokud je již přihlášen, se zobrazí jeho osobní informace a aktivní role. Přímo zde nemůže nic upravovat, ale pomocí tlačítka \texttt{Edit} je přesměrován na stránku s úpravou osobních údajů.
+
+Šablona \textit{user\_change.html} obsahuje formulář pro editaci osobních údajů, který umožňuje upravit jeden či více záznamů naráz. Heslo se zde nezobrazuje, ale přes odkaz lze pokračovat na stránku \textit{password\_change.html}, kde je možné provést jeho změnu.
+
+%static
+Složka \textit{static} umístěná v hlavním adresáři projektu obsahuje soubor \textit{styles.css}, jenž popisuje způsob zobrazení elementů, které jsou součástí jednotlivých šablon uživatelské konzole. To je umožněno načtením tohoto souboru pomocí \texttt{\{\% load static \%\}} do bázové šablony. K vytvoření designu byly použity kaskádové styly (\zk{CSS}).
+
+%template tags
+Django umožňuje vytvořit si vlastní filtry. Ty jsou specifikovány v souboru \textit{auth\_extras.py} uloženém v adresáři aplikace \textit{users/templatetags} a k šablonám jsou připojeny pomocí \texttt{\{\% load auth\_extras \%\}}. Filtru \texttt{foo} lze předat hodnotu proměnné \textit{var} a argument \textit{arg}. Poté, co je filtr zaregistrován jako \textit{django.template.Library.filter()} a definována žádaná funkce, je možné jej zavolat v šabloně příkazem:
+
+\texttt{\{\{ var|foo:"arg" \}\}}
+
+Pro potřeby zobrazení aktivních rolí uživatele v šabloně \textit{home.html} byly vytvořeny dva filtry. První zjišťuje všechny existující role v databázi Djanga a na něj navazuje druhý, který určuje, zda je uživatel jejich členem. Výsledky jsou pak zobrazeny v \zk{GUI}.
 
 \subsubsection{users}
 
