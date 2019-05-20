@@ -3,27 +3,62 @@
 
 % http://gislab-npo.github.io/gislab/index.html
 
-Open-source GISová platforma GIS.lab slouží k rychlému a jednoduchému nasazení centrálně řízené GIS infrastruktury v lokální síti (LAN), data centra nebo cloudové služby. Poskytuje celistvý soubor neplaceného GIS softwaru integrovaného do jednoho systému, který je okamžitě připraven k použití.
- 
-Všechny použité technologie jsou plně pod kontrolou správců, náklady na nasazení a vlastnictví takovéhoto komplexního řešení jsou sníženy na absolutní minimum. Díky tomu je možné GIS.lab využít v oblastech a podmínkách, kde by aplikace jiné technologie nebyla cenově dostupná či technicky možná. Příkladem mohou být zóny zasažené přírodní katastrofou či sféra školství a vzdělávacích institucí.
+Open-source platforma GIS.lab slouží k rychlému a jednoduchému
+nasazení centrálně řízené GIS infrastruktury v lokální síti (LAN),
+data centru nebo cloudové službě. Poskytuje celistvý soubor
+neplaceného GIS softwaru integrovaného do jednoho systému, který je
+okamžitě připraven k použití.
+% ML: nevim, zda to je popsano dale, ale chtelo by nacrtnout rozsah
+% softwarovych komponent od DB pres analyticke nastroje az po webove
+% sluzby a publikacni platformu (Gisquick)
+
+Všechny použité technologie jsou plně pod kontrolou správců systému, náklady
+na nasazení a vlastnictví takovéhoto komplexního řešení jsou sníženy
+na absolutní minimum. Díky tomu je možné GIS.lab využít v oblastech a
+podmínkách, kde by aplikace proprietárních technologií nebyla cenově dostupná či
+technicky možná. Příkladem mohou být rozvojové země či sféra školství a vzdělávacích institucí.
 
 % Co to už umí?
-GIS.lab je dostupný jako desktopový, webový a mobilní klient. Webový a mobilní klient jsou přístupné díky samostatné platformě Gisquick, která je automaticky integrovaná i do desktopové verze. GIS.lab Desktop obsahuje nejvíce funkcionalit, z nichž mezi nejdůležitější patří ukládání prostorově i neprostorově orientovaných dat a jejich sdílení, tvorba a analýza vektorových, rastrových i tabulkových dat nebo rychlé vytváření kartografických výstupů.
+GIS.lab je dostupný ve formě desktopového klienta. Vytváření webových aplikací je přístupné díky samostatné platformě Gisquick, která je automaticky integrovaná i do desktopové verze. GIS.lab
+Desktop obsahuje širokou škálu funkcionalit, z nichž mezi nejdůležitější
+patří ukládání prostorově i neprostorově orientovaných dat a jejich
+sdílení, tvorba a analýza vektorových, rastrových i tabulkových dat
+či rychlé vytváření kartografických výstupů. Data mohou být ukládána buď v souborovém systému, nebo v PostGIS databázi.
 
 % Co to má ještě do budoucna umět?
-Vývoj GIS.labu ještě ani zdaleka není u konce. Nabízené portfolio se má do budoucna dělit na čtyři základní služby - přístup k PostGIS databázi, publikaci dat pomocí webových mapových služeb (\zk{WMS}, \zk{WFS}), webovou aplikaci a desktopového klienta (více viz kapitola \ref{vision}). 
-
-%Pro snazší administraci uživatelů a jejich přístupových práv ke zmiňovaným službám bylo rozhodnuto vytvořit webové administrátorské rozhraní. Jednodušší přístup  
+Vývoj GIS.labu ještě ani zdaleka není u konce. Nabízené portfolio se
+má do budoucna dělit na pět základních balíčků - datasety otevřených dat, přístup k PostGIS
+databázi, publikaci dat pomocí webových mapových služeb (\zk{WMS},
+\zk{WFS}), webovou aplikaci a desktopového klienta (více viz kapitola
+\ref{vision}). Všechny komponenty by měly být dostupné jak společně, tak i samostatně, nezávisle na desktopovém klientovi. Mezi dalšími rozšířeními by mohl být například výpočetní server na bázi WPS (Web Processing Service) a další.
 
 % Důvod pro moji DP.
-Vývojáři GIS.labu se obecně snaží o co nejvíce uživatelsky přívětivé prostředí, což vedlo k rozhodnutí (potřebě) vytvořit webové administrátorské rozhraní pro snazší správu uživatelů a definování jejich přístupových práv ke zmiňovaným službám. Současný systém administrace přes příkazovou řádku není pro některé správce srozumitelný, navíc neumožňuje žádosti o registraci a o přiřazení přístupových práv přímo ze strany uživatelů. Pro naplnění tohoto požadavku vzniklo zadání této diplomová práce.
+Vývojáři GIS.labu se obecně snaží o co nejvíce uživatelsky přívětivé
+prostředí, což vedlo k rozhodnutí (potřebě) vytvořit webové
+administrátorské rozhraní pro snazší správu uživatelů a definování
+jejich přístupových práv ke zmiňovaným službám. Současný systém
+administrace přes příkazovou řádku není pro některé správce
+srozumitelný, navíc neumožňuje žádosti o registraci a o přiřazení
+přístupových práv přímo ze strany uživatelů. Pro naplnění tohoto
+požadavku vzniklo zadání této diplomová práce.
+
+%TODO tady možná zmínit, že se bude jednat o admin a uživatelskou konzoli
 
 % Volba technologií
-Při návrhu webové aplikace bude vyvinuta snaha o její maximální integraci do stávající architektury platformy GIS.lab. Pro vytvoření webového rozhraní byl zvolen framework Django, který využívá, dnes již od GIS.labu oddělená, platforma Gisquick. Důležitou vlastností tohoto frameworku je i to, že je psaný v jazyce Python, což umožní navázání na existující, ale nedokončenou knihovnu pro administraci uživatelů z roku 2015, která by měla nahradit současné bashové skripty. Pro ověření mezi webovou aplikací a LDAP serverem obsahujícím uživatelské informace bude využita některá z dostupných externích knihoven (např. django-python3-ldap, ldap3). 
-% jak nahradit pojem bashové skripty??
+Při návrhu webové aplikace bude vyvinuta snaha o její maximální
+integraci do stávající architektury platformy GIS.lab. Pro vytvoření
+webového rozhraní bude zvolen framework Django, který využívá, dnes již
+od GIS.labu oddělená, platforma Gisquick. Důležitou vlastností tohoto
+frameworku je i to, že je psaný v jazyce Python, což umožní navázání
+na existující, ale nedokončenou knihovnu pro administraci uživatelů z
+roku 2015, která by měla nahradit současné shellové skripty. Pro
+ověření mezi webovou aplikací a LDAP serverem obsahujícím uživatelské
+informace bude využita některá z dostupných externích knihoven
+(např. django-python3-ldap, ldap3).
 
 % Teoretická část
-V teoretické části bude čtenář především podrobněji seznámen s platformou GIS.lab, jejím budoucím rozšířením a protokolem LDAP.
+V teoretické části bude čtenář především podrobněji seznámen s
+platformou GIS.lab, jejím budoucím rozšířením a protokolem LDAP, který slouží k přístupu k datům, jejich úpravám a ukládání na adresářovém serveru.
 
 Rešerše
 
