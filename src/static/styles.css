@@ -3,6 +3,19 @@ body {
 	color: #888;
 }
 
+nav {
+	display: flex;
+	justify-content: space-between;
+}
+
+nav a img {
+	height: 85px;
+}
+
+nav .button-box {
+	margin: 27px 0;
+}
+
 main {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 	max-width: 38rem;

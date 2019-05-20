@@ -8,15 +8,14 @@
 </head>
 <body>
   <main>
-    {% if user.is_authenticated %}
       <nav>
         <a href="{% url 'home' %}">
           <img src="{% static 'gislab_white.svg' %}">
         </a>
-
+    {% if user.is_authenticated %}
         <a class="button-box" href="{% url 'logout' %}">logout</a>
-      </nav>
     {% endif %}
+      </nav>
     {% block content %}
     {% endblock %}
   </main>
