@@ -80,6 +80,7 @@ kompatibilní s verzí Python 2. Hlavním důvodem pro takto zásadní změnu
 bylo rozhodnutí Guido van Rossuma, zakladatele jazyku Python, očistit
 Python 2.x od mnoha problémů pořádně v jednom kroku.
 
+%% ML: upraveni tradicnich trid (?)
 Největšími změnami jsou upravení tradičních tříd a oddělení abstrakcí
 \textsf{řetězec} a \textsf{posloupnost bytů}. Textový řetězec
 (\textsf{str}) je nově převeden ve výchozím nastavení na typ unicode,
@@ -118,6 +119,7 @@ Poslední vydanou stabilní verzí je Python
 % http://www.djangoproject.cz/dokumentace/intro/tutorial01/#intro-tutorial01 - pro české výrazy, ale netřeba uvádět
 
 Django je vysokoúrovňový webový framework napsaný v jazyce Python. Je
+%% ML: druha cast vety nenavazuje na prvni
 udržované organizací Django Software Foundation (DSF), bezplatné a
 vydané pod open-source licencí \zk{BSD}. Název získalo po jazzovém
 kytaristovi Djangovi Reinhardtovi.
@@ -199,7 +201,7 @@ restartu. Tento server se spouští příkazem:
 \end{center}
 
 Standardně se vývojový server spouští na interní \zk{IP} adrese a
-portu 8000. V případě, že je třeba zobrazovat webové stránky mimo
+portu 8000. V~případě, že je třeba zobrazovat webové stránky mimo
 stroj, na němž server běží, lze nastavit viditelnost a odlišný port
 serveru přidáním parametru \textsf{0:8080}. V takové situaci je
 stránka dostupná odkudkoliv při zadání adresy nastavené v proměnné
@@ -213,7 +215,7 @@ Pro práci s databází jsou nezbytné dva základní příkazy:
 \end{center}
 
 který vytváří jednotlivé migrační soubory založené na změnách
-provedených v modelech Djanga a
+provedených v~modelech Djanga a
 
 \begin{center}
 \textsf{python manage.py migrate}
@@ -258,6 +260,7 @@ Implicitní struktura aplikace je vždy stejná:
 \begin{itemize}
 \item \textsf{\_\_init\_\_.py} - určuje aplikaci jako balíček Pythonu
 \item \textsf{admin.py} - umožňuje registraci datových modelů
+  %% ML: ??
 \item \textsf{apps.py} - definuje název aplikace??
 \item \textsf{models.py} - umožňuje tvorbu datových modelů
 \item \textsf{tests.py} - umožňuje tvorbu jednotkových testů
@@ -279,6 +282,9 @@ položce \textsf{INSTALLED\_APPS}.
       \label{fig:docker}
   \end{figure}
 
+%% ML: dopsat
+
 \section{Ansible}
 \label{ansible}  
 
+%% ML: dopsat
