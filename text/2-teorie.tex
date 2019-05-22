@@ -28,18 +28,27 @@ pořízení a údržbu.
 	\label{fig:gislab-schema}
 \end{figure}
 
-Svět softwaru založeného na myšlence open-source sestává z velkého množství různorodých osobností a skupin, z nichž každá svůj projekt uchopuje po svém. Propojit tyto různorodé nástroje mezi sebou do funkčního celku je náročný úkol a právě ten se pokouší řešit platforma GIS.lab. 
+Svět softwaru založeného na myšlence open-source sestává z velkého
+množství různorodých osobností a skupin, z nichž každá svůj projekt
+uchopuje po svém. Propojit tyto různorodé nástroje mezi sebou do
+funkčního celku je náročný úkol a právě ten se pokouší řešit platforma
+GIS.lab.
 
 K největším výhodám této platformy patří maximálně automatizovaná
 instalace či rychlé nasazení pomocí GIS.lab Unit (viz
 \ref{gislab-unit}), jejichž výsledkem je plně funkční a vysoce výkonný
 nástroj, bez nutnosti dalšího složitého nastavení. Přizpůsobení
-specifickým potřebám zákazníka je však také možné.\footnote{Úpravy pro skupinu GISMentors: \href{https://github.com/GISMentors/gislab-customization}{https://github.com/GISMentors/gislab-customization}} Všichni klienti GIS.labu Desktop, uživatelské účty i zálohy jsou centrálně spravované.
+specifickým potřebám zákazníka je však také možné.\footnote{Úpravy pro
+  skupinu GISMentors:
+  \href{https://github.com/GISMentors/gislab-customization}{https://github.com/GISMentors/gislab-customization}}
+Všichni klienti GIS.labu Desktop, uživatelské účty i zálohy jsou
+centrálně spravované.
 
-Z hlediska \zk{GIS} infrastruktury a její komplexnosti jsou nejzásadnější ukládání prostorově i
-neprostorově orientovaných dat (v souborovém systému nebo v PostGIS databázi) a jejich sdílení, tvorba a analýza
-vektorových, rastrových i tabulkových dat nebo rychlé vytváření
-kartografických výstupů. 
+Z hlediska \zk{GIS} infrastruktury a její komplexnosti jsou
+nejzásadnější ukládání prostorově i neprostorově orientovaných dat (v
+souborovém systému nebo v PostGIS databázi) a jejich sdílení, tvorba a
+analýza vektorových, rastrových i tabulkových dat nebo rychlé
+vytváření kartografických výstupů.
 
 Desktopový klient (tlustý klient) GIS.lab Desktop může být spuštěn v
 režimu fyzickém či virtuálním. Virtuální režim lze využít na
@@ -60,8 +69,12 @@ zamýšleno v tradičním pojetí desktopu jako jediného klienta, ale spíše
 jako jakési specializované klientské rozhraní poskytující nástroje ze
 světa desktopu.
 
-Konfiguraci a nasazení GIS.labu řídí platforma Ansible (viz \ref{docker}). Deployment ve
-virtuálním režimu umožňuje Vagrant\footnote{open-source nástroj pro vytváření a údržbu přesnosného vývojového prostředí pomocí virtualizace} a VirtualBox\footnote{Oracle VM VirtualBox, multiplatformní virtualizační nástroj}.
+Konfiguraci a nasazení GIS.labu řídí platforma Ansible (viz
+\ref{docker}). Deployment ve virtuálním režimu umožňuje
+Vagrant\footnote{open-source nástroj pro vytváření a údržbu
+  přesnosného vývojového prostředí pomocí virtualizace} a
+VirtualBox\footnote{Oracle VM VirtualBox, multiplatformní
+  virtualizační nástroj}.
 
 GIS.lab se po nasazení sestává z jednoho stroje, který zastává roli
 hlavního uzlu (server, master), a k němu připojeného množství dalších počítačů
@@ -79,18 +92,35 @@ síťového přepínače (switch). Výpočetní kapacitu je možné sdílet pře
 	\label{fig:gislab-architecture}
 \end{figure}
 
-GIS.lab Server běží na operačním systému Ubuntu Linux LTS s odlehčeným desktopovým prostředím XFCE. 
-K ověření a správě uživatelů využívá protokol LDAP, přesněji jeho nadstavbu OpenLDAP (viz \ref{openldap}). 
+GIS.lab Server běží na operačním systému Ubuntu Linux LTS s odlehčeným
+desktopovým prostředím XFCE.  K ověření a správě uživatelů využívá
+protokol LDAP, přesněji jeho nadstavbu OpenLDAP (viz \ref{openldap}).
 
 %https://gislab.readthedocs.io/en/latest/client-layout/index.html#gis-applications
-Vedle základního softwarového vybavení standardního \zk{OS} jsou dostupné dva hlavní GISové programy QGIS a GRASS GIS. QGIS je vhodný pro tvorbu projektů, přípravu a analýzu dat. Umožňuje i jejich následnou publikaci nejen v podobě \zk{WMS}/\zk{WFS} služeb, ale i jako webových aplikací pomocí předinstalovaného zásuvného modulu Gisquick. GRASS GIS lze využít pro komplexní datové analýzy. 
+Vedle základního softwarového vybavení standardního \zk{OS} jsou
+dostupné dva hlavní GISové programy QGIS a GRASS GIS. QGIS je vhodný
+pro tvorbu projektů, přípravu a analýzu dat. Umožňuje i jejich
+následnou publikaci nejen v podobě \zk{WMS}/\zk{WFS} služeb, ale i
+jako webových aplikací pomocí předinstalovaného zásuvného modulu
+Gisquick. GRASS GIS lze využít pro komplexní datové analýzy.
 
-Data jsou uložena v souborovém systému či geodatabázi PostGIS. Dostupná je i nadstavba SpatiaLite pro databázi SQLite umožňující ukládání geoprostorových dat. 
+Data jsou uložena v souborovém systému či geodatabázi
+PostGIS. Dostupná je i nadstavba SpatiaLite pro databázi SQLite
+umožňující ukládání geoprostorových dat.
 
-GIS.lab obsahuje velké množství knihoven a balíčků Python, z nichž zde jsou zmíněni jen vybraní zástupci. GDAL je knihovna určená pro zápis a čtení vektorových a rastrových geodat. Proj.4 slouží k transformaci geoprostorových souřadnic z jednoho souřadnicového systému do dalšího. Pro práci se satelitními daty družic MODIS a Sentinel slouží PyModis a Sentinelsat.
+GIS.lab obsahuje velké množství knihoven a balíčků Python, z nichž zde
+jsou zmíněni jen vybraní zástupci. GDAL je knihovna určená pro zápis a
+čtení vektorových a rastrových geodat. Proj.4 slouží k transformaci
+geoprostorových souřadnic z jednoho souřadnicového systému do
+dalšího. Pro práci se satelitními daty družic MODIS a Sentinel slouží
+PyModis a Sentinelsat.
 % přidat JOSM?
 
-Přizpůsobení základní instalace specifickým požadavkům může být provedeno buď standardními linuxovými příkazy, nebo upravením Ansible Playbooks, které se vyznačují pro člověka snadno čitelným jazykem. Chování systému během vytváření a odstraňování uživatelských účtů je definováno v pěti speciálních skriptech. 
+Přizpůsobení základní instalace specifickým požadavkům může být
+provedeno buď standardními linuxovými příkazy, nebo upravením Ansible
+Playbooks, které se vyznačují pro člověka snadno čitelným
+jazykem. Chování systému během vytváření a odstraňování uživatelských
+účtů je definováno v pěti speciálních skriptech.
 \begin{itemize}
 \item \texttt{before-add} - spuštěn před vytvořením účtu
 \item \texttt{after-add} - spuštěn po vytvoření účtu
@@ -98,7 +128,14 @@ Přizpůsobení základní instalace specifickým požadavkům může být prove
 \item \texttt{after-delete} - spuštěn po odstranění účtu
 \item \texttt{files} - obsah tohoto adresáře je zkopírován do domovského adresáře uživatele předtím než je spuštěn skript \texttt{after-add}
 \end{itemize}
-Tyto skripty je také možné upravovat konkrétním potřebám. Příkladem může být nakládání s databází. Ve skriptu \texttt{after-add} definujeme, zda uživateli bude vytvořena nová databáze nebo jen přidáno schéma do již existující společné. Ve skriptu \texttt{before-delete} zvolíme, jestli před odstraněním účtu dojde k vyprodukování tzv. dumpu, který bude uživateli zaslán na jeho adresu. A nakonec při spuštění \texttt{after-delete} bude tato databáze/schéma odstraněno.
+Tyto skripty je také možné upravovat konkrétním potřebám. Příkladem
+může být nakládání s databází. Ve skriptu \texttt{after-add}
+definujeme, zda uživateli bude vytvořena nová databáze nebo jen
+přidáno schéma do již existující společné. Ve skriptu
+\texttt{before-delete} zvolíme, jestli před odstraněním účtu dojde k
+vyprodukování tzv. dumpu, který bude uživateli zaslán na jeho
+adresu. A nakonec při spuštění \texttt{after-delete} bude tato
+databáze/schéma odstraněno.
 
 \subsubsection{GIS.lab Unit}
 \label{gislab-unit}
@@ -107,7 +144,8 @@ Zařízení s názvem GIS.lab Unit je přenosné hardwarové řešení
 obsahující systém GIS.lab připravený k okamžitému zapojení a nasazení
 ve zvolené síti. Jedná se o krabičku s rozměry přibližně 11 x 11 x 4
 cm, procesorem Intel Haswell, SSD diskem a 16 GB RAM. Maximální
-testované množství klientských počítačů je 20, v rámci výuky na Fakultě stavební ČVUT.
+testované množství klientských počítačů je 20, v rámci výuky na
+Fakultě stavební ČVUT.
 
 \begin{figure}[H] \centering
     \includegraphics[width=350pt]{./pictures/gislab-unit.jpg}
@@ -208,12 +246,28 @@ Nejblíže zařazení na seznam služeb je webové rozhraní pro správu
 uživatelů, které je zpracováváno v rámci této diplomové
 práce. 
 
-Aktuálně používaný systém správy uživatelů funguje na bázi
-příkazové řádky a je popsán v kapitole \ref{cmd-line}. Tento systém není pro všechny úplně intuitivní, zároveň neumožňuje přístup ze strany uživatelů. Proto je cílem vytvořit webové grafické uživatelské rozhraní (\zk{GUI}), které bude mít dvě části - administrátorskou a uživatelskou.
+Aktuálně používaný systém správy uživatelů funguje na bázi příkazové
+řádky a je popsán v kapitole \ref{cmd-line}. Tento systém není pro
+všechny úplně intuitivní, zároveň neumožňuje přístup ze strany
+uživatelů. Proto je cílem vytvořit webové grafické uživatelské
+rozhraní (\zk{GUI}), které bude mít dvě části - administrátorskou a
+uživatelskou.
 
-Uživatelská konzole bude umožňovat registraci, přístup k osobním údajům a jejich editaci a v neposlední řadě žádosti o zpřístupnění jednotlivých balíčků služeb. Balíčky by v první fázi měly sestávat z pěti složek: datasetů otevřených dat; přístupu k datům (souborový systém, DB); publikace dat pomocí webových mapových služeb; webové aplikace; desktopového klienta. Přístup k prvním třem komponentám by měl být možný i mimo desktopového klienta, což je další důvod pro vytvoření webového rozhraní, ke kterému lze přistupovat z jakéhokoliv počítače. Přes konzoli bude probíhat i sdílení dat s dalšími uživateli či žádost o navýšení kapacity databáze. Kromě úpravy uživatelských údajů budou všechny změny vyžadovat potvrzení správce.
+Uživatelská konzole bude umožňovat registraci, přístup k osobním
+údajům a jejich editaci a v neposlední řadě žádosti o zpřístupnění
+jednotlivých balíčků služeb. Balíčky by v první fázi měly sestávat z
+pěti složek: datasetů otevřených dat; přístupu k datům (souborový
+systém, DB); publikace dat pomocí webových mapových služeb; webové
+aplikace; desktopového klienta. Přístup k prvním třem komponentám by
+měl být možný i mimo desktopového klienta, což je další důvod pro
+vytvoření webového rozhraní, ke kterému lze přistupovat z jakéhokoliv
+počítače. Přes konzoli bude probíhat i sdílení dat s dalšími uživateli
+či žádost o navýšení kapacity databáze. Kromě úpravy uživatelských
+údajů budou všechny změny vyžadovat potvrzení správce.
 
-Administrátorská konzole bude mít v podstatě stejnou funkcionalitu jako uživatelská s tím rozdílem, že administrátor bude moci spravovat všechny uživatele. 
+Administrátorská konzole bude mít v podstatě stejnou funkcionalitu
+jako uživatelská s tím rozdílem, že administrátor bude moci spravovat
+všechny uživatele.
 
 \begin{figure}[H] \centering
     \includegraphics[width=400pt]{./pictures/console_services_02.png}
@@ -244,9 +298,19 @@ NFS (Network File System). Tímto způsobem budou moci uživatelé
 pracovat s daty i při běhu svého standardního \zk{OS}.
 
 \subsubsection{webové mapové služby}
-Pro publikaci dat je nyní aktuálně nutné být přihlášen na desktopovém klientovi GIS.lab, zde vytvořit projekt a nakopírovat jej do adresáře \textit{Publish}. Poté je přístupný jako webová služba dle standardu OGC (Open Geospatial Consortium). Cílem je umožnit uživateli vytvořit si projekt ve svém vlastním prostředí a následně ho jen nahrát na server, který by dovolil jeho sdílení. Připojení k serveru za tímto účelem bude umožňovat výše zmiňovaná služba \zk{NFS}. 
+Pro publikaci dat je nyní aktuálně nutné být přihlášen na desktopovém
+klientovi GIS.lab, zde vytvořit projekt a nakopírovat jej do adresáře
+\textit{Publish}. Poté je přístupný jako webová služba dle standardu
+OGC (Open Geospatial Consortium). Cílem je umožnit uživateli vytvořit
+si projekt ve svém vlastním prostředí a následně ho jen nahrát na
+server, který by dovolil jeho sdílení. Připojení k serveru za tímto
+účelem bude umožňovat výše zmiňovaná služba \zk{NFS}.
 
-Další variantu bude pro uživatele nabízet webová uživatelská konzole, přes níž bude možné projekt na server nahrát a konzole zpátky klientovi vygeneruje správnou cestu k webové mapové službě. Tento přístup bude potřeba zvláště v případě, že uživatel bude mít přístup pouze k balíčku webových mapových služeb.
+Další variantu bude pro uživatele nabízet webová uživatelská konzole,
+přes níž bude možné projekt na server nahrát a konzole zpátky
+klientovi vygeneruje správnou cestu k webové mapové službě. Tento
+přístup bude potřeba zvláště v případě, že uživatel bude mít přístup
+pouze k balíčku webových mapových služeb.
 
 \subsubsection{datasety otevřených dat}
 
@@ -275,11 +339,13 @@ které by se jej rozhodly využívat, bude připraveno několik základních
 přizpůsobení, hlavně s ohledem na datasety z veřejného sektoru.
 
 \subsubsection{přizpůsobení klientským požadavkům}
-Poslední v blízké době plánovanou změnou je umožnit zákazníkům přizpůsobit platformu
-GIS.lab konkrétním požadavkům již při nasazení pomocí Ansible
-Playbooks (viz \ref{docker}). Aktuálně jsou využívány pro plně automatizovanou
-instalaci základní podoby GIS.labu a úpravy pro jednotlivá školení skupiny
-GISMentors. Podobným způsobem jako pro GISMentors se bude uzpůsobovat prostředí i pro další skupiny, např. fakulty ČVUT.
+Poslední v blízké době plánovanou změnou je umožnit zákazníkům
+přizpůsobit platformu GIS.lab konkrétním požadavkům již při nasazení
+pomocí Ansible Playbooks (viz \ref{docker}). Aktuálně jsou využívány
+pro plně automatizovanou instalaci základní podoby GIS.labu a úpravy
+pro jednotlivá školení skupiny GISMentors. Podobným způsobem jako pro
+GISMentors se bude uzpůsobovat prostředí i pro další skupiny,
+např. fakulty ČVUT.
 
 Ukázky nejvyužívanějších nastavení budou dostupné v Github
 repozitáři.
