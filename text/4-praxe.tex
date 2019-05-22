@@ -7,7 +7,9 @@
 
 Aktuálně probíhá správa uživatelských účtů spouštěním shellových
 skriptů. Všechny příkazy je nutné spouštět pod právem
+%% ML: sudo -> administratora (citelnejsi pro uzivatele, ktery nezna Linux)
 \textit{sudo}. Některé z nich umožňují použití parametrů, pro část
+%% ML: ta druha cast vety neni moc srozumitelna 
 jsou dokonce povinné.
 
 Seznam názvů dostupných skriptů pro GIS.lab administraci vrací příkaz
@@ -130,6 +132,7 @@ Technologie použité při vývoji byly zvoleny na základě těch již
 aplikovaných v rámci platformy GIS.lab, resp. Gisquick. Pro zpracování
 byl zvolen programovací jazyk Python 3. V první řadě se jedná o
 budoucnost tohoto jazyka, na rozdíl od Pythonu 2. Také to umožní
+%% ML: nastrel -> neco vhodnejsiho, navrh...
 navázat na nástřel existující knihovny pro správu uživatelů z roku
 2015. Navíc je to jazyk, v němž je napsán framework Django, který byl
 použit také při tvorbě webové aplikace Gisquick. Ta byla původně
@@ -293,6 +296,7 @@ konci volána vlastní funkce ze souboru \textit{ldap\_auth.py}, jež
 provádí synchronizaci skupin do Djanga.
 
 %ldap_auth.py
+%% ML: se sestává (to slovo mas v praci naduzivano, je evidetne Tvoje oblibene ;-)
 Soubor \textbf{ldap\_auth.py} sestává z jediné funkce
 \textsf{custom\_sync\_user\_relations()}. Používaná knihovna
 \textit{django\_python3\_ldap} při synchronizaci předpokládá existenci
@@ -319,6 +323,7 @@ definována šablona \textit{home.html} jako domovská stránka.
 
 \subsubsection{users}
 
+%% ML: se ...
 Tento adresář sestává z souborů tvořících Django aplikaci s názvem
 \textit{users}, základní struktura byla vytvořena příkazem
 \textsf{python manage.py startapp users}.
@@ -354,7 +359,7 @@ tříd, jedné pro správu uživatelů a druhé pro správu skupin (rolí).
 
 V \textsf{CustomUserAdmin} je připojen vlastní model
 \textsf{CustomUser} a vlastní formuláře pro vytváření uživatele, změnu
-údajů a hesla. Implicitní nastavení je upraveno a zobrazují se jen
+údajů a hesla. Implicitní nastavení je upraveno. Zobrazují se jen
 pole a filtry, které jsou pro administrátorskou konzoli potřebné. Při
 manipulaci s uživatelským účtem přes administrátorskou konzoli se
 nevolají metody formuláře, ale metody třídy \textsf{UserAdmin}. Proto
@@ -402,6 +407,8 @@ metodě \textsf{delete\_group()}. Není umožněno provádět žádné úpravy,
 protože jediným existujícím atributem je název role. Při tvorbě je
 zvolena konstanta pro identifikační číslo skupiny, propojení s Python
 knihovnou tuto situaci vyřeší (viz výše). Před odstraněním jsou
+%% ML: v tomto ohledu se web konzole chova jinak nez admin prikazy
+%% (maze pouze prazdne skupiny). nemusis menit, pouze znimit
 nejdříve zrušeny veškeré vztahy k uživatelům.
  
 %views
@@ -453,6 +460,7 @@ správně, je uživatel přesměrován na přihlašovací stránku, v opačném
 případě je zobrazena chybová hláška a potřebná data je nutné opravit,
 resp. doplnit.
 
+%% ML: se sestava (opakujici se slovo)
 Template \textbf{login.html} sestává z jednoduchého formuláře pro
 vyplnění uživatelského jména a hesla. Při neúspěšném pokusu je vypsána
 chyba, po zdárném vyplnění je uživatel přesměrován na domovskou
@@ -486,6 +494,7 @@ souboru \textbf{auth\_extras.py} uloženém v adresáři aplikace
 \textit{users/templatetags} a k šablonám jsou připojeny pomocí
 \textsf{\{\% load auth\_extras \%\}}. Filtru \textsf{foo} lze předat
 hodnotu proměnné \textit{var} a argument \textit{arg}. Poté, co je
+%% ML: preteceni textu
 filtr zaregistrován jako \textit{django.template.Library.filter()} a
 definována žádaná funkce, je možné jej zavolat v šabloně příkazem:
 
@@ -501,8 +510,8 @@ určuje, zda je uživatel jejich členem. Výsledky jsou pak zobrazeny v
 % https://www.tablesgenerator.com/latex_tables
 
 Pro vývoj byla využita implicitní databáze Djanga SQLite. Z hlediska
-uživatelů a rolí jsou důležité především tři tabulky
-\textit{auth\_group}, \textit{users\_customuser} a
+uživatelů a~rolí jsou důležité především tři tabulky
+\textit{auth\_group}, \textit{users\_customuser} a\newline
 \textit{users\_customuser\_groups}.
 
 Tabulka \textbf{auth\_group} obsahuje pouze názvy existujících rolí.
@@ -519,6 +528,7 @@ type & integer & varchar(80) \\ \bottomrule
 \label{tab:auth-group}
 \end{table}
 
+%% ML sestava...
 Tabulka \textbf{users\_customuser} sestává z osobních údajů uživatelů
 včetně zašifrovaného hesla, data vytvoření, posledního přihlášení a
 interních statusů Djanga.
@@ -694,4 +704,5 @@ o navýšení kapacity databáze a další služby popsané v kapitole GIS.lab
 (\ref{vision}).
 
 %docker
+%% ML: dopsat ...
 Docker ještě doplním.
