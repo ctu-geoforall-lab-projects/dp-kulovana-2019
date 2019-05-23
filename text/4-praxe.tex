@@ -25,6 +25,10 @@ např. pro zálohování dat nebo upgrade GIS.lab systému.
 %TK: tady u těch popisů nevím, jestli dávat někam přesnou podobu příkazu (gislab-adduser [OPTIONS] username)
 %přímo jako nadpis (\subsubsection{gislab-adduser...}) nebo někam pod něj? nebo to nepsat vůbec?
 %nebo mít u každého konkrétní příkaz: $ sudo gislab-adduser -g User -l GIS.lab -m lab1@gis.lab -p lab lab1 ??
+%% ML: presna podoba prikazu asi neni podstatna, nechal bych nadpisy,
+%% tak jak jsou. Co bych ale pridal jsou priklady pouziti (jak uvadis
+%% vyse). Jediny priklad je ted u gislab-listgroups, podobne priklady
+%% pouziti bych pridal ke vsem prikazum
 
 \subsubsection{gislab-adduser}
 \begin{itemize}
@@ -123,6 +127,7 @@ grep.
 \textsf{uid: uid=user02}
 
 %TK: u listusers a listgroups by možná pro lepší orientaci pomohlo přidat obrázky nebo textový výpis, jak vlastně vypadají výsledky, které vrací:
+%% ML: asi ano (textovy vypis)
 %dn: uid=gislab,ou=People,dc=gis,dc=lab                                                                                  objectClass: inetOrgPerson                                                                                              objectClass: posixAccount                                                                                               objectClass: shadowAccount                                                                                              uid: gislab                                                                                                             uidNumber: 3000                                                                                                         gidNumber: 3001                                                                                                         homeDirectory: /mnt/home/gislab                                                                                         loginShell: /bin/bash                                                                                                   cn: Administrator GIS.lab (gislab_vagrant_bionic)                                                                       sn: GIS.lab (gislab_vagrant_bionic)                                                                                     givenName: Administrator                                                                                                mail: gislab@gis.lab                                                                                                    userPassword:: e1NTSEF9Y0JBWUdMcVgxNTdweVJreXdxZzJRaUlpTE9CaHNaSTU=                                                     description: fjdsklfjdsl 
 
 \section{Webové administrátorské a uživatelské rozhraní}
@@ -375,6 +380,7 @@ GIS.lab konzole.
 
 %ldap_sync
 %TK:možná by to bylo přehlednější, kdybych tady k tomu připsala nějaký hodně stručný pseudokod? s tím, co se v které metodě synchronizuje?
+%% ML: souhlas!
 Soubor \textbf{ldap\_sync.py} je zcela nově vytvořen a obsahuje
 vlastní třídu \textsf{SyncDjangoLDAP}, jež provádí synchronizaci změn
 z Djanga do \zk{LDAP}. Při její inicializaci je vytvořeno připojení k
