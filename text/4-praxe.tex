@@ -7,10 +7,8 @@
 
 Aktuálně probíhá správa uživatelských účtů spouštěním shellových
 skriptů. Všechny příkazy je nutné spouštět pod právem
-%% ML: sudo -> administratora (citelnejsi pro uzivatele, ktery nezna Linux)
-\textit{sudo}. Některé z nich umožňují použití parametrů, pro část
-%% ML: ta druha cast vety neni moc srozumitelna 
-jsou dokonce povinné.
+\textit{sudo} (jako administrátor). Některé příkazy lze spustit 
+s parametry, které mohou být buď povinné, nebo nepovinné.
 
 Seznam názvů dostupných skriptů pro GIS.lab administraci vrací příkaz
 \textsf{gislab-help}. Každý jednotlivý příkaz z tohoto soupisu pak lze
@@ -133,8 +131,7 @@ Technologie použité při vývoji byly zvoleny na základě těch již
 aplikovaných v rámci platformy GIS.lab, resp. Gisquick. Pro zpracování
 byl zvolen programovací jazyk Python 3. V první řadě se jedná o
 budoucnost tohoto jazyka, na rozdíl od Pythonu 2. Také to umožní
-%% ML: nastrel -> neco vhodnejsiho, navrh...
-navázat na nástřel existující knihovny pro správu uživatelů z roku
+navázat na koncept existující knihovny pro správu uživatelů z roku
 2015. Navíc je to jazyk, v němž je napsán framework Django, který byl
 použit také při tvorbě webové aplikace Gisquick. Ta byla původně
 součástí GIS.labu a tímto způsobem zůstane celá široká základna v
@@ -297,7 +294,6 @@ konci volána vlastní funkce ze souboru \textit{ldap\_auth.py}, jež
 provádí synchronizaci skupin do Djanga.
 
 %ldap_auth.py
-%% ML: se sestává (to slovo mas v praci naduzivano, je evidetne Tvoje oblibene ;-)
 Soubor \textbf{ldap\_auth.py} sestává z jediné funkce
 \textsf{custom\_sync\_user\_relations()}. Používaná knihovna
 \textit{django\_python3\_ldap} při synchronizaci předpokládá existenci
@@ -324,8 +320,7 @@ definována šablona \textit{home.html} jako domovská stránka.
 
 \subsubsection{users}
 
-%% ML: se ...
-Tento adresář sestává z souborů tvořících Django aplikaci s názvem
+Tento adresář se skládá ze souborů tvořících Django aplikaci s názvem
 \textit{users}, základní struktura byla vytvořena příkazem
 \textsf{python manage.py startapp users}.
 
@@ -408,9 +403,10 @@ metodě \textsf{delete\_group()}. Není umožněno provádět žádné úpravy,
 protože jediným existujícím atributem je název role. Při tvorbě je
 zvolena konstanta pro identifikační číslo skupiny, propojení s Python
 knihovnou tuto situaci vyřeší (viz výše). Před odstraněním jsou
-%% ML: v tomto ohledu se web konzole chova jinak nez admin prikazy
-%% (maze pouze prazdne skupiny). nemusis menit, pouze znimit
-nejdříve zrušeny veškeré vztahy k uživatelům.
+nejdříve zrušeny veškeré vztahy k uživatelům. V tomto ohledu se webová 
+konzole chová odlišně od současné správy přes administrátorské příkazy. 
+Příkaz \textsf{gislab-delgroup} nedovoluje smazat skupinu, pokud není 
+prázdná.
  
 %views
 Soubor \textbf{views.py} obsahuje logiku propojující formuláře a
@@ -461,7 +457,6 @@ správně, je uživatel přesměrován na přihlašovací stránku, v opačném
 případě je zobrazena chybová hláška a potřebná data je nutné opravit,
 resp. doplnit.
 
-%% ML: se sestava (opakujici se slovo)
 Template \textbf{login.html} sestává z jednoduchého formuláře pro
 vyplnění uživatelského jména a hesla. Při neúspěšném pokusu je vypsána
 chyba, po zdárném vyplnění je uživatel přesměrován na domovskou
@@ -529,8 +524,7 @@ type & integer & varchar(80) \\ \bottomrule
 \label{tab:auth-group}
 \end{table}
 
-%% ML sestava...
-Tabulka \textbf{users\_customuser} sestává z osobních údajů uživatelů
+Tabulka \textbf{users\_customuser} se skládá z osobních údajů uživatelů
 včetně zašifrovaného hesla, data vytvoření, posledního přihlášení a
 interních statusů Djanga.
 

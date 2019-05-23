@@ -171,7 +171,6 @@ GIS.lab kromě desktopového klienta i webovou publikační platformu.
 
 Gisquick je open-source platforma umožňující publikaci geoprostorových
 dat. Byla vytvořena s cílem snadného sdílení projektů vytvořených v
-%% ML: se sestava
 desktopové aplikaci QGIS na webu. Gisquick sestává ze zásuvného modulu
 QGIS, QGIS serveru, serverové aplikace založené na frameworku Django a 
 webového klienta. Obsahuje základní sadu nástrojů
@@ -194,8 +193,7 @@ pod otevřenou licencí GNU \zk{GPL} v2.0.
 V současné době se GIS.lab využívá především při výuce na Fakultě
 stavební ČVUT v rámci hodin zaměřených na \zk{GIS} a dálkový průzkum
 Země (\zk{DPZ}) a na Přírodovědecké fakultě Univerzity Karlovy. Také
-%% ML: otevrena -> spise verejna
-na něm probíhají otevřená školení skupiny GISMentors.
+na něm probíhají veřejná školení skupiny GISMentors.
 
 \begin{figure}[H] \centering
     \includegraphics[width=350pt]{./pictures/classroom.jpg}
@@ -211,8 +209,7 @@ připojením k databázi pomocí PgAdmin, většinou je však využíváno
 připojení přes QGIS. QGIS je také upřednostňovaným softwarem při
 zpracování prostorových i neprostorových dat, výhodou je i možnost
 využívat zásuvný modul Gisquick pro publikaci dat v podobě webových
-% ML: Studenti jsou kratce ... (vynechal bych presto)
-aplikací. Přesto jsou studenti krátce seznámeni s programem GRASS GIS,
+aplikací. Studenti jsou krátce seznámeni s programem GRASS GIS,
 strukturou GRASS projektů a práce s nimi. GRASS GIS je více využíván v
 rámci předmětů orientovaných na \zk{DPZ}, jelikož obsahuje dobře
 implementované nástroje pro zpracování obrazových dat. K nástrojům
@@ -280,9 +277,6 @@ všechny uživatele.
 \end{figure}
 
 \subsubsection{Sdílení dat}
-%% ML: mezi fyzicky a virtualnim dektop klientem moc rozdil neni,
-%% maximalne, ze virtualni klient bezi nad Virtualboxem a muze k nemu
-%% pripojit slozky z hostitelskeho OS (shared folders)
 V případě fyzického režimu GIS.lab Desktop jsou veškerá vytvořená data
 dostupná pouze v rámci klienta, na němž GIS.lab běží, sdílet s dalšími
 uživateli je lze pouze přes společné adresáře \textit{Repository} a
@@ -294,17 +288,20 @@ databáze, bude k tomu moci v první fázi využít SQL příkazu GRANT,
 později pak vyhledat jiného uživatele přes webovou administrátorskou
 konzoli a přístup mu udělit přes ni.
 
-Pokud má uživatel zájem data přenést z klienta pryč nebo naopak nějaká
+Virtuální režim GIS.lab Desktop běží nad VirtualBoxem, který umožňuje 
+připojení složek z hostitelského \zk{OS}. Pokud má uživatel zájem data 
+přenést z fyzického klienta pryč nebo naopak nějaká
 data nahrát, musí k tomu využít mezistupeň v podobě externího disku,
 ať už reálného či virtuálního. Ideální by proto byla možnost
 přistupovat vzdáleně nejen k databázi, ale například i k oddílu na
 serveru obsahujícím data ve formátu Esri Shapefile (.shp) či OGC
 GeoPackage (.gpkg). Tuto variantu bude umožňovat sdílení pomocí služby
-%% ML: NFS jiz pouziva dektopovy klient pro pripojeni domovsheho
-%% adresare a dalsich (barrel, repository) z unitu (serveru). takze
-%% jde pouze o to dovolit pripojeni disku u mimo desktop klienta
 NFS (Network File System). Tímto způsobem budou moci uživatelé
 pracovat s daty i při běhu svého standardního \zk{OS}.
+
+Desktopový klient již \zk{NFS} využívá pro připojení některých adresářů 
+(Home, Barell, Repository) ze serveru. Cílem tedy je povolit sdílení 
+disku i mimo desktop klienta.
 
 \subsubsection{Webové mapové služby}
 Pro publikaci dat je nyní aktuálně nutné být přihlášen na desktopovém
@@ -323,9 +320,9 @@ pouze k balíčku webových mapových služeb.
 
 \subsubsection{Datasety otevřených dat}
 
-Část dat už je v rámci státní správy České republiky poskytovaná ve
-%% ML: o ne (moc nedava smysl)...
-formě otevřených dat. Ne všichni zájemci o ně však vědí, kde zmiňovaná
+Část dat už je dnes v rámci státní správy České republiky poskytovaná ve
+formě otevřených dat. Ne všichni uživatelé, kteří by je mohli ke své 
+práci využít, však vědí, kde zmiňovaná
 data najít, případně jak je dostat do formátu vhodného k dalším
 analýzám. Právě pro ně bude vhodný další balíček.
 
@@ -342,8 +339,7 @@ při reálné implementaci.
 
 \subsubsection{Server ČVUT}
 Snaha o rozšíření základny uživatelů platformy GIS.lab cílí v
-%% ML: ... a zamestrance
-nejbližší době především na studenty ČVUT a to i mimo Fakultu
+nejbližší době především na studenty a zaměstnance ČVUT a to i mimo Fakultu
 stavební. V prvním kroku již byly získány prostředky, jež umožňují
 spuštění GIS.labu přes server ČVUT. Pro jednotlivé fakulty či katedry,
 které by se jej rozhodly využívat, bude připraveno několik základních
@@ -358,7 +354,7 @@ pro jednotlivá školení skupiny GISMentors. Podobným způsobem jako pro
 GISMentors se bude uzpůsobovat prostředí i pro další skupiny,
 např. fakulty ČVUT.
 
-%% ML: jakem (odkaz)?
 Ukázky nejvyužívanějších nastavení budou dostupné v Github
-repozitáři.
+repozitáři 
+\href{https://github.com/gislab-npo/gislab/}{https://github.com/gislab-npo/gislab/}.
 
