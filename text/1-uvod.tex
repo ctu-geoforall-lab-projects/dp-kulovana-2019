@@ -1,4 +1,6 @@
-\chapter{Úvod}
+\chapter*{Úvod}
+\addcontentsline{toc}{chapter}{Úvod}
+\markboth{ÚVOD}{} %zajisti, aby byl text uvod v~zahlavi
 \label{1-uvod}
 
 % http://gislab-npo.github.io/gislab/index.html
@@ -58,8 +60,17 @@ informace bude využita některá z dostupných externích knihoven
 
 % Teoretická část
 V teoretické části bude čtenář především podrobněji seznámen s
-platformou GIS.lab, jejím budoucím rozšířením a protokolem LDAP, který slouží k přístupu k datům, jejich úpravám a ukládání na adresářovém serveru.
+platformou GIS.lab, jejím budoucím rozšířením a protokolem LDAP, 
+který slouží k přístupu k datům, jejich úpravám a ukládání na 
+adresářovém serveru.
 
+\newpage
 Rešerše
 
-jiné open source projekty, které taky používali nějakou webovou aplikaci pro správu uživatelů
+Framework Django automaticky po instalaci obsahuje vestavěné administrační rozhraní. To slouží ke správě záznamů v lokální databázi. Django umožňuje využít připravené modely \textit{User} a \textit{Group} nebo si vytvářet vlastní. Bylo vyvinuto jako komplexní nástroj pro zobrazování a spravování článků, komentářů, uživatelů a autorů v novinářském prostředí. Administrátorské rozhraní pro správu uživatelů a jejich příslušnosti ke skupinám je jen malou podmnožinou toho, co všechno tento framework umí. Django nabízí obsáhlou dokumentaci \cite{django-doc}, která usnadňuje jak orientaci v problematice, tak vlastní vývoj.
+
+Prvotní inspirací pro webovou konzoli byla platforma Gisquick (viz \ref{gisquick}), která využívá framework Django. Jedná se o webovou mapovou aplikaci, do níž se mohou uživatelé zaregistrovat a po přihlášení zveřejňovat a spravovat své projekty. Po oddělení od GIS.labu jsou uživatelské účty uloženy ve výchozí databázi SQLite. Verze, jež je integrovaná v GIS.labu, ale ověřuje přihlašovací údaje vůči \zk{LDAP} serveru. Zvolené nastavení připojení k \k{LDAP} bylo použito v počáteční fázi vývoje webové konzole GIS.lab.
+
+Dalšími zajímavými projekty, které využívají Django pro správu uživatelů je např. chatovací aplikace Zulip (\href{https://zulipchat.com}{https://zulipchat.com}) nebo platforma pro online prodej Oscar (\href{http://oscarcommerce.com}{http://oscarcommerce.com}).
+
+%TK: ještě rozšířím, když zbyde čas
