@@ -351,6 +351,8 @@ Docker existuje v placené formě i jako open-source software. Funguje v prostř
 
 \section{Ansible}
 \label{ansible}  
+% https://docs.ansible.com/ansible/latest/index.html
 
-%% ML: dopsat
-%% TK: doplním
+Ansible je jednoduchý automatizační nástroj, který umožňuje konfiguraci systémů, víceuzlové nasazení aplikací a orchestraci jiných pokročilejších úloh. Orchestrace je řízena z jednoho řídícího stroje, jenž přistupuje ke spravovaným uzlům přes SSH nebo PowerShell. Ansible využívá architekturu, jež běží bez agentů, tedy na uzly jsou jen dočasně nainstalovány a spuštěny tzv. moduly pomocí SSH. Ve chvíli, kdy Ansible uzly neřídí, uzel nespotřebovává žádné prostředky, jelikož na něm není nainstalován démon, který by sám software spouštěl.
+
+K zápisu znovupoužitelného popisu stavu uzlů jsou vytvářeny Ansible Playbooks. Jedná se o soubory psané v jazyce YAML, který se vyznačuje pro člověka snadnou čitelností.
