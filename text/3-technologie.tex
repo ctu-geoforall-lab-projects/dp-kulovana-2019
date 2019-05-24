@@ -8,15 +8,38 @@ tvorbě webového administrátorského rozhraní.
 % https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol
 % %http://www.openldap.org/doc/admin24/intro.html
 
-Lightweight Directory Access Protocol neboli \zk{LDAP} je otevřený, standardizovaný protokol pro přístup k adresářovým službám. Slouží k zobrazování dat, jejich úpravám a ukládání na adresářovém serveru přes Internet Protocol (\zk{IP}).
+Lightweight Directory Access Protocol neboli \zk{LDAP} je otevřený,
+standardizovaný protokol pro přístup k adresářovým službám. Slouží k
+zobrazování dat, jejich úpravám a ukládání na adresářovém serveru přes
+Internet Protocol (\zk{IP}).
 
-Adresářová služba (directory service) je v podstatě specializovaná databáze, která slouží především k procházení a vyhledávání, ke změnám dochází jen zřídka. Obvykle neposkytuje komplikovanější databázové techniky, jako jsou transakce a operace nutné pro zachování datové integrity. Pro zvýšení rychlosti odezvy mohou dokonce obsahovat i duplicitní záznamy.
+Adresářová služba (directory service) je v podstatě specializovaná
+databáze, která slouží především k procházení a vyhledávání, ke změnám
+dochází jen zřídka. Obvykle neposkytuje komplikovanější databázové
+techniky, jako jsou transakce a operace nutné pro zachování datové
+integrity. Pro zvýšení rychlosti odezvy mohou dokonce obsahovat i
+duplicitní záznamy.
 
-\zk{LDAP} je založen na modelu server-klient. Jeden či více \zk{LDAP} serverů obsahují data ve stromové struktuře (directory information tree, DIT). Klient požádá o záznam odpovídající jeho dotazu. Odpověď dostane buď ze serveru, ke kterému je připojen, nebo je odkázán na jiný server, kde je informace uložena. Výsledek hledání bude vždy stejný, ať už se připojí ke kterémukoliv serveru. Tento rys je důležitý obzvláště u globálních adresářových služeb.
+\zk{LDAP} je založen na modelu server-klient. Jeden či více \zk{LDAP}
+serverů obsahují data ve stromové struktuře (directory information
+tree, DIT). Klient požádá o záznam odpovídající jeho dotazu. Odpověď
+dostane buď ze serveru, ke kterému je připojen, nebo je odkázán na
+jiný server, kde je informace uložena. Výsledek hledání bude vždy
+stejný, ať už se připojí ke kterémukoliv serveru. Tento rys je
+důležitý obzvláště u globálních adresářových služeb.
 
-\zk{LDAP} model se skládá z jednotlivých záznamů (entries). Záznam sestává z kolekce atributů (povinných a nepovinných) a má přiřazen globálně unikátní identifikátor, tzv. Distinguished Name (\zk{DN}), který je založen na lokaci záznamu v rámci hierarchického (stromového) uspořádání modelu. \zk{DN} začíná vlastním jménem záznamu (Relative Distinguished Name) a k němu jsou jako řetěz připojena jména všech jeho předků. Každý atribut má vlastní datový typ a může obsahovat jednu či více hodnot.
+\zk{LDAP} model se skládá z jednotlivých záznamů (entries). Záznam
+sestává z kolekce atributů (povinných a nepovinných) a má přiřazen
+globálně unikátní identifikátor, tzv. Distinguished Name (\zk{DN}),
+který je založen na lokaci záznamu v rámci hierarchického (stromového)
+uspořádání modelu. \zk{DN} začíná vlastním jménem záznamu (Relative
+Distinguished Name) a k němu jsou jako řetěz připojena jména všech
+jeho předků. Každý atribut má vlastní datový typ a může obsahovat
+jednu či více hodnot.
 
-Podle uvedené ukázky stromové struktury by jednoznačným pojmenováním pro uživatele se jménem \textsf{uid=test01} bylo \zk{DN} \textsf{uid=test01, ou=People, dc=org, dc=com}.
+Podle uvedené ukázky stromové struktury by jednoznačným pojmenováním
+pro uživatele se jménem \textsf{uid=test01} bylo \zk{DN}
+\textsf{uid=test01, ou=People, dc=org, dc=com}.
 
 \begin{figure}[H] \centering
       \includegraphics[width=380pt]{./pictures/ldap_dit.png}
@@ -25,11 +48,18 @@ Podle uvedené ukázky stromové struktury by jednoznačným pojmenováním pro 
       \label{fig:ldap-dit}
 \end{figure}
 
-\zk{LDAP} poskytuje ochranu informací, které jsou na serveru uloženy, pomocí mechanismu autentizace, který požaduje po klientovi prokázaní a ověření identity před zobrazením jakýchkoliv dat. 
+\zk{LDAP} poskytuje ochranu informací, které jsou na serveru uloženy,
+pomocí mechanismu autentizace, který požaduje po klientovi prokázaní a
+ověření identity před zobrazením jakýchkoliv dat.
 
-Server \zk{LDAP} je vhodný pro autentizaci uživatelů a klientských zařízení, pro správu uživatelských informací, apod. Výhodou je, že uživatelé potřebují pro přístup k různým aplikacím v síti (pošta, ftp) pouze jedny přihlašovací údaje. Je nezávislý na operačním systému.
+Server \zk{LDAP} je vhodný pro autentizaci uživatelů a klientských
+zařízení, pro správu uživatelských informací, apod. Výhodou je, že
+uživatelé potřebují pro přístup k různým aplikacím v síti (pošta, ftp)
+pouze jedny přihlašovací údaje. Je nezávislý na operačním systému.
 
-Protokol LDAP vychází ze standardu X.500, jehož je odlehčenou variantou. Někdy je nazýván X.500-lite.\footnote{https://www.webopedia.com/TERM/L/LDAP.html}
+Protokol LDAP vychází ze standardu X.500, jehož je odlehčenou
+variantou. Někdy je nazýván
+X.500-lite.\footnote{https://www.webopedia.com/TERM/L/LDAP.html}
 
 \newpage
 \subsection{OpenLDAP}
@@ -44,7 +74,12 @@ Protokol LDAP vychází ze standardu X.500, jehož je odlehčenou variantou. Ně
       \label{fig:ldap}
 \end{figure}
 
-OpenLDAP je otevřená (open-source) implementace protokolu \zk{LDAP} vyvíjená pod hlavičkou OpenLDAP Project. OpenLDAP je distribuován pod vlastní licencí OpenLDAP Public License.\footnote{http://www.openldap.org/software/release/license.html} Vývoj OpenLDAP má počátek v roce 1998 a navazuje na předešlou činnost University of Michigan. 
+OpenLDAP je otevřená (open-source) implementace protokolu \zk{LDAP}
+vyvíjená pod hlavičkou OpenLDAP Project. OpenLDAP je distribuován pod
+vlastní licencí OpenLDAP Public
+License.\footnote{http://www.openldap.org/software/release/license.html}
+Vývoj OpenLDAP má počátek v roce 1998 a navazuje na předešlou činnost
+University of Michigan.
 
 Hlavní komponenty:
 \begin{itemize}
@@ -53,15 +88,31 @@ Hlavní komponenty:
 \item klientské nástroje (ldapsearch, ldapadd, ldapmodify,...)
 \end{itemize}
 
-\textit{slapd} (Standalone \zk{LDAP} daemon) je nezávislý \zk{LDAP} adresářový server, který zachytává \zk{LDAP}připojení a odpovídá na operace, které přes tato spojení obdrží. Umožňuje připojení ke globální \zk{LDAP} adresářové službě nebo může lokální služby obsluhovat sám. Může běžet na mnoha různých platformách.
+\textit{slapd} (Standalone \zk{LDAP} daemon) je nezávislý \zk{LDAP}
+adresářový server, který zachytává \zk{LDAP}připojení a odpovídá na
+operace, které přes tato spojení obdrží. Umožňuje připojení ke
+globální \zk{LDAP} adresářové službě nebo může lokální služby
+obsluhovat sám. Může běžet na mnoha různých platformách.
 
-Podporuje silnou autentizaci a bezpečnost dat díky metodě SASL (Simple Authentication and Security Layer) a protokolu TLS (Transport Layer Security). Poskytuje široké možnosti kontroly přístupu k informacím v databázi - přístup může být udělen  mj. na základě přihlašovacích údajů, \zk{IP} adresy nebo \zk{DN}. \textit{slapd} nabízí celou škálu databázových backendů - MDB, hierarchický, vysoce výkonný transakční databázový backend; SHELL, backend pro shellové skripty; a jednoduchý backend PASSWD a jiné. 
+Podporuje silnou autentizaci a bezpečnost dat díky metodě SASL (Simple
+Authentication and Security Layer) a protokolu TLS (Transport Layer
+Security). Poskytuje široké možnosti kontroly přístupu k informacím v
+databázi - přístup může být udělen mj. na základě přihlašovacích
+údajů, \zk{IP} adresy nebo \zk{DN}. \textit{slapd} nabízí celou škálu
+databázových backendů - MDB, hierarchický, vysoce výkonný transakční
+databázový backend; SHELL, backend pro shellové skripty; a jednoduchý
+backend PASSWD a jiné.
 
 Konfigurace \textit{slapd} probíhá přes konfigurační soubor, příklad takové změny je uveden v kapitole \ref{web-console}. 
 
 %ldapmodify, ldapadd, ldapsearch, ldapdelete?
 
-GIS.lab využívá OpenLDAP 2.4. V rámci webové aplikace probíhá synchronizace s Djangem, z adresářové struktury OpenLDAP jsou konkrétně využívány organizační jednotky \textit{People} a \textit{Groups}. Náhled struktury GIS.labu je v ukázce omezen jen na záznamy potřebné k vytvoření \zk{DN} těchto organizačních jednotek, které v realitě obsahují mnohem více záznamů.
+GIS.lab využívá OpenLDAP 2.4. V rámci webové aplikace probíhá
+synchronizace s Djangem, z adresářové struktury OpenLDAP jsou
+konkrétně využívány organizační jednotky \textit{People} a
+\textit{Groups}. Náhled struktury GIS.labu je v ukázce omezen jen na
+záznamy potřebné k vytvoření \zk{DN} těchto organizačních jednotek,
+které v realitě obsahují mnohem více záznamů.
 
 \begin{figure}[H] \centering
       \includegraphics[width=400pt]{./pictures/gislab-ldap_dit.png}
@@ -72,20 +123,38 @@ GIS.lab využívá OpenLDAP 2.4. V rámci webové aplikace probíhá synchroniza
 
 \subsection{django-python3-ldap}
 % https://github.com/etianen/django-python3-ldap/blob/master/README.rst
-Knihovna \textit{django-python3-ldap} zajišťuje autentizaci uživatelů s \zk{LDAP} serverem a synchronizaci \zk{LDAP} uživatelů s lokální databází Djanga. Podporuje vlastní modely Djanga upravené specifickým potřebám. Ve výchozím nastavení je nakonfigurována podpora přihlášení přes OpenLDAP, po úpravě nastavení umožňuje připojení k adresářové službě Microsoft Active Directory. Funguje jak pro Python 2, tak pro Python 3.
+Knihovna \textit{django-python3-ldap} zajišťuje autentizaci uživatelů
+s \zk{LDAP} serverem a synchronizaci \zk{LDAP} uživatelů s lokální
+databází Djanga. Podporuje vlastní modely Djanga upravené specifickým
+potřebám. Ve výchozím nastavení je nakonfigurována podpora přihlášení
+přes OpenLDAP, po úpravě nastavení umožňuje připojení k adresářové
+službě Microsoft Active Directory. Funguje jak pro Python 2, tak pro
+Python 3.
 
-Při prvním přihlášení uživatele se aplikace pokusí vytvořit připojení k \zk{LDAP} serveru skrze poskytnuté uživatelské jméno a heslo. V případě úspěšného připojení jsou údaje z \zk{LDAP} serveru uloženy do databáze Djanga a při každém dalším přihlášení jsou aktualizovány. 
+Při prvním přihlášení uživatele se aplikace pokusí vytvořit připojení
+k \zk{LDAP} serveru skrze poskytnuté uživatelské jméno a heslo. V
+případě úspěšného připojení jsou údaje z \zk{LDAP} serveru uloženy do
+databáze Djanga a při každém dalším přihlášení jsou aktualizovány.
 
-Synchronizaci všech uživatelů zároveň zajišťuje příkaz \textsf{manage.py ldap\_sync\_users}. Tuto akci lze provést jednorázově, pro pravidelnou synchronizaci může být automatizovaně spouštěn na pozadí skrze softwarového démona Cron.
+Synchronizaci všech uživatelů zároveň zajišťuje příkaz
+\textsf{manage.py ldap\_sync\_users}. Tuto akci lze provést
+jednorázově, pro pravidelnou synchronizaci může být automatizovaně
+spouštěn na pozadí skrze softwarového démona Cron.
 
-Použití této knihovny je relativně snadné. Po instalaci stačí v konfiguračním souboru Djanga \textit{settings.py} nastavit potřebné proměnné (např. \zk{URL} adresu \zk{LDAP} serveru) a při příštím spuštění serveru již synchronizace funguje. 
+Použití této knihovny je relativně snadné. Po instalaci stačí v
+konfiguračním souboru Djanga \textit{settings.py} nastavit potřebné
+proměnné (např. \zk{URL} adresu \zk{LDAP} serveru) a při příštím
+spuštění serveru již synchronizace funguje.
 
 \textit{django-python3-ldap} vychází z knihovny \textit{ldap3}.
 
 \subsection{ldap3}
 %https://ldap3.readthedocs.io/welcome.html
 %https://buildmedia.readthedocs.org/media/pdf/ldap3/stable/ldap3.pdf - ldap3 dokumentace
-Knihovna \textit{ldap3} je založena na aplikaci protokolu \zk{LDAP} v3. Poskytuje operace potřebné pro připojení k \zk{LDAP} serveru, pro vyhledání záznamů, jejich vytvoření, úpravu a odstranění. Podporuje verze Python 2 i 3. 
+Knihovna \textit{ldap3} je založena na aplikaci protokolu \zk{LDAP}
+v3. Poskytuje operace potřebné pro připojení k \zk{LDAP} serveru, pro
+vyhledání záznamů, jejich vytvoření, úpravu a odstranění. Podporuje
+verze Python 2 i 3.
 
 
 \section{Python}
@@ -337,11 +406,24 @@ položce \textsf{INSTALLED\_APPS}.
   
 % https://docs.docker.com/get-started/
 % https://en.wikipedia.org/wiki/Docker_(software)
-Docker je platforma pro vývoj, deployment a běh aplikací. Poskytuje jednotné rozhraní pro izolaci procesů do standardizovaných balíčků, tzv. kontejnerů. Kontejnery jsou tvořeny vlastním softwarem, knihovnami a konfiguračními soubory. Jsou na sobě navzájem nezávislé, ale mohou mezi sebou komunikovat skrze definované kanály. Na rozdíl od virtuálních strojů neobsahují kontejnery operační systém, ale sdílejí kernel s hlavním operačním systémem. Díky tomu je režie při jejich spuštění výrazně nižší a mají mnohem menší velikost.
+Docker je platforma pro vývoj, deployment a běh aplikací. Poskytuje
+jednotné rozhraní pro izolaci procesů do standardizovaných balíčků,
+tzv. kontejnerů. Kontejnery jsou tvořeny vlastním softwarem,
+knihovnami a konfiguračními soubory. Jsou na sobě navzájem nezávislé,
+ale mohou mezi sebou komunikovat skrze definované kanály. Na rozdíl od
+virtuálních strojů neobsahují kontejnery operační systém, ale sdílejí
+kernel s hlavním operačním systémem. Díky tomu je režie při jejich
+spuštění výrazně nižší a mají mnohem menší velikost.
 
-Kontejnery jsou vytvořeny z tzv. obrazů (images). Image je spustitelný balíček, který obsahuje všechno potřebné pro běh aplikace (kód, knihovny, proměnné prostředí, konfigurační soubory). Využívá se ke skladování a sdílení aplikací. Z jednoho obrazu je možné spustit jakékoliv množství kontejnerů. 
+Kontejnery jsou vytvořeny z tzv. obrazů (images). Image je spustitelný
+balíček, který obsahuje všechno potřebné pro běh aplikace (kód,
+knihovny, proměnné prostředí, konfigurační soubory). Využívá se ke
+skladování a sdílení aplikací. Z jednoho obrazu je možné spustit
+jakékoliv množství kontejnerů.
 
-Docker existuje v placené formě i jako open-source software. Funguje v prostředí Linuxu, novějších verzích Windows a ve vybraných cloudových službách. Skládá se ze tří komponent:
+Docker existuje v placené formě i jako open-source software. Funguje v
+prostředí Linuxu, novějších verzích Windows a ve vybraných cloudových
+službách. Skládá se ze tří komponent:
 
 \begin{itemize}
 \item software - Docker démon, proces, který řídí Docker kontejnery
@@ -353,6 +435,15 @@ Docker existuje v placené formě i jako open-source software. Funguje v prostř
 \label{ansible}  
 % https://docs.ansible.com/ansible/latest/index.html
 
-Ansible je jednoduchý automatizační nástroj, který umožňuje konfiguraci systémů, víceuzlové nasazení aplikací a orchestraci jiných pokročilejších úloh. Orchestrace je řízena z jednoho řídícího stroje, jenž přistupuje ke spravovaným uzlům přes SSH nebo PowerShell. Ansible využívá architekturu, jež běží bez agentů, tedy na uzly jsou jen dočasně nainstalovány a spuštěny tzv. moduly pomocí SSH. Ve chvíli, kdy Ansible uzly neřídí, uzel nespotřebovává žádné prostředky, jelikož na něm není nainstalován démon, který by sám software spouštěl.
+Ansible je jednoduchý automatizační nástroj, který umožňuje
+konfiguraci systémů, víceuzlové nasazení aplikací a orchestraci jiných
+pokročilejších úloh. Orchestrace je řízena z jednoho řídícího stroje,
+jenž přistupuje ke spravovaným uzlům přes SSH nebo PowerShell. Ansible
+využívá architekturu, jež běží bez agentů, tedy na uzly jsou jen
+dočasně nainstalovány a spuštěny tzv. moduly pomocí SSH. Ve chvíli,
+kdy Ansible uzly neřídí, uzel nespotřebovává žádné prostředky, jelikož
+na něm není nainstalován démon, který by sám software spouštěl.
 
-K zápisu znovupoužitelného popisu stavu uzlů jsou vytvářeny Ansible Playbooks. Jedná se o soubory psané v jazyce YAML, který se vyznačuje pro člověka snadnou čitelností.
+K zápisu znovupoužitelného popisu stavu uzlů jsou vytvářeny Ansible
+Playbooks. Jedná se o soubory psané v jazyce YAML, který se vyznačuje
+pro člověka snadnou čitelností.
