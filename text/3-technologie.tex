@@ -146,6 +146,8 @@ konfiguračním souboru Djanga \textit{settings.py} nastavit potřebné
 proměnné (např. \zk{URL} adresu \zk{LDAP} serveru) a při příštím
 spuštění serveru již synchronizace funguje.
 
+%% ML: tu vetu bych zaclenil nejak do textu, takto pusobi rusive
+%% (jeste navic na zacatku stranky)
 \textit{django-python3-ldap} vychází z knihovny \textit{ldap3}.
 
 \subsection{ldap3}
@@ -406,12 +408,15 @@ položce \textsf{INSTALLED\_APPS}.
   
 % https://docs.docker.com/get-started/
 % https://en.wikipedia.org/wiki/Docker_(software)
+%% ML: deployment -> cesky pojem
 Docker je platforma pro vývoj, deployment a běh aplikací. Poskytuje
 jednotné rozhraní pro izolaci procesů do standardizovaných balíčků,
-tzv. kontejnerů. Kontejnery jsou tvořeny vlastním softwarem,
+tzv. kontejnerů. Kontej\-nery jsou tvořeny vlastním softwarem,
 knihovnami a konfiguračními soubory. Jsou na sobě navzájem nezávislé,
 ale mohou mezi sebou komunikovat skrze definované kanály. Na rozdíl od
 virtuálních strojů neobsahují kontejnery operační systém, ale sdílejí
+%% ML: kernel jadro , mozna + poznamka pod carou, co je jadro OS (viz
+%% napr. wikipedia, tu bych se v poznamce pod caru nebal citovat)
 kernel s hlavním operačním systémem. Díky tomu je režie při jejich
 spuštění výrazně nižší a mají mnohem menší velikost.
 
