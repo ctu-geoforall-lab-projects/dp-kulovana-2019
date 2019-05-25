@@ -5,27 +5,80 @@
 
 % Popsat, které knihovny byly nakonec zvoleny??
 
-Tato diplomová práce si kladla za cíl vytvořit webové administrátorské rozhraní pro potřeby platformy GIS.lab. Zadání se podařilo splnit v primární, neodladěné formě. Během zpracování se vyskytlo několik dalších požadavků, které bude třeba do finální podoby zakomponovat.
+Tato diplomová práce si kladla za cíl vytvořit webové administrátorské
+rozhraní pro potřeby platformy GIS.lab. Zadání se podařilo splnit v
+primární, neodladěné formě. Během zpracování se vyskytlo několik
+dalších požadavků, které bude třeba do finální podoby zakomponovat.
 
-V době odevzdání práce obsahuje administrátorská konzole základní funkcionalitu: přidávání nových uživatelů, jejich úpravu a odebírání, správu příslušnosti k rolím (skupinám), vytváření a mazání těchto rolí. Pro běžného uživatele je prozatím dostupná registrace, přihlášení pod svým účtem do uživatelské konzole, která zobrazuje osobní informace a role, jichž je uživatel členem. Své osobní informace, včetně hesla, může uživatel měnit. 
+V době odevzdání práce obsahuje administrátorská konzole základní
+funkcionalitu: přidávání nových uživatelů, jejich úpravu a odebírání,
+správu příslušnosti k rolím (skupinám), vytváření a mazání těchto
+rolí. Pro běžného uživatele je prozatím dostupná registrace,
+přihlášení pod svým účtem do uživatelské konzole, která zobrazuje
+osobní informace a role, jichž je uživatel členem. Své osobní
+informace, včetně hesla, může uživatel měnit.
 
-Komunikace mezi webovou aplikací a LDAP serverem funguje obousměrně, ale vyžaduje do budoucna ještě odladění, doplnění některých okrajových případů a v první řadě zajištění pravidelné automatické synchronizace. Nejzásadnější problematické situace v aktuální verzi nastávají v případě odstranění uživatele na LDAP serveru - změna se nyní okamžitě neprojeví v databázi webové aplikace a pokud byl uživatel v momentu smazání přihlášen, může i nadále upravovat svoje údaje.
+Komunikace mezi webovou aplikací a LDAP serverem funguje obousměrně,
+ale vyžaduje do budoucna ještě odladění, doplnění některých okrajových
+případů a v první řadě zajištění pravidelné automatické
+synchronizace. Nejzásadnější problematické situace v aktuální verzi
+nastávají v případě odstranění uživatele na LDAP serveru - změna se
+nyní okamžitě neprojeví v databázi webové aplikace a pokud byl
+uživatel v momentu smazání přihlášen, může i nadále upravovat svoje
+údaje.
 
-Role může aktuálně uživateli přiřazovat jen administrátor, záměrem je umožnit uživateli vybrat si potřebné role už při registračním procesu, případně následně zažádat o změnu přes uživatelskou konzoli.
+Role může aktuálně uživateli přiřazovat jen administrátor, záměrem je
+umožnit uživateli vybrat si potřebné role už při registračním procesu,
+případně následně zažádat o změnu přes uživatelskou konzoli.
 
-V současnosti jsou všechny změny propisovány do databáze okamžitě. Cílovým stavem, po vyplnění registračního formuláře a ověření emailové adresy uživatele, je poslat emailové upozornění administrátorovi s žádostí o vytvoření nového účtu. Teprve po potvrzení správcem funkční uživatelský účet skutečně vznikne. Stejným potvrzovacím procesem budou procházet i žádosti o přiřazení nové role.
+V současnosti jsou všechny změny propisovány do databáze
+okamžitě. Cílovým stavem, po vyplnění registračního formuláře a
+ověření emailové adresy uživatele, je poslat emailové upozornění
+administrátorovi s žádostí o vytvoření nového účtu. Teprve po
+potvrzení správcem funkční uživatelský účet skutečně vznikne. Stejným
+potvrzovacím procesem budou procházet i žádosti o přiřazení nové role.
 
-Důležitým prvkem, který bude třeba přidat, je ověřování platnosti emailové adresy během procesu vytváření nového uživatele i při případné následné změně emailu samotným uživatelem. Pro lepší přehlednost budou pro uživatele také přidány informativní zprávy o úspěšné změně osobních údajů či hesla.
+Důležitým prvkem, který bude třeba přidat, je ověřování platnosti
+emailové adresy během procesu vytváření nového uživatele i při
+případné následné změně emailu samotným uživatelem. Pro lepší
+přehlednost budou pro uživatele také přidány informativní zprávy o
+úspěšné změně osobních údajů či hesla.
 
-Administrátorská konzole je ponechána v původním designu Djanga, design uživatelské konzole byl inspirován vzhledem webové platformy Gisquick, avšak v konečné verzi dozná ještě dalších úprav.
+Administrátorská konzole je ponechána v původním designu Djanga,
+design uživatelské konzole byl inspirován vzhledem webové platformy
+Gisquick, avšak v konečné verzi dozná ještě dalších úprav.
 
-Podstatným bodem z hlediska vývoje je zprovoznění plnohodnotného výpisu logů a doplnění dalších informativních zpráv o probíhajících procesech ve webové konzoli. Veškerá současná řešení i finální podobu bude třeba řádně ověřit pomocí automatizovaných testů.
+Podstatným bodem z hlediska vývoje je zprovoznění plnohodnotného
+výpisu logů a doplnění dalších informativních zpráv o probíhajících
+procesech ve webové konzoli. Veškerá současná řešení i finální podobu
+bude třeba řádně ověřit pomocí automatizovaných testů.
 
-Otázkou, na níž bude třeba teprve najít odpověď, je, jakým způsob bude vhodné se postavit ke schopnosti administrátorů měnit osobní údaje a případně i heslo dalších administrátorů. Nyní mají všichni správci přístup k údajům všech ostatních osob v databázi a u každé z nich mohou upravovat cokoliv. Bezpečnost je dalším prvkem, který bude vyžadovat hlubší prozkoumání, především s ohledem na předávání hesla mezi webovou aplikací a LDAP serverem a také následné šifrování hesla na LDAP serveru. 
+Otázkou, na níž bude třeba teprve najít odpověď, je, jakým způsob bude
+vhodné se postavit ke schopnosti administrátorů měnit osobní údaje a
+případně i heslo dalších administrátorů. Nyní mají všichni správci
+přístup k údajům všech ostatních osob v databázi a u každé z nich
+mohou upravovat cokoliv. Bezpečnost je dalším prvkem, který bude
+vyžadovat hlubší prozkoumání, především s ohledem na předávání hesla
+mezi webovou aplikací a LDAP serverem a také následné šifrování hesla
+na LDAP serveru.
 
-V roce 2015 vznikl prvotní návrh Python knihovny, která by měla nahradit stávající shellové skripty při tvorbě uživatelů (více viz kapitola \ref{python-knihovna}). Její vývoj byl na jistou dobu pozastaven, ale jedním z ambicioznějších cílů této práce bylo její dokončení a propojení s webovou aplikací. To se před termínem odevzdání nepodařilo, ale práce na knihovně byly obnoveny a v krátké době snad budou úspěšně završeny.
+V roce 2015 vznikl prvotní návrh Python knihovny, která by měla
+nahradit stávající shellové skripty při tvorbě uživatelů (více viz
+kapitola \ref{python-knihovna}). Její vývoj byl na jistou dobu
+pozastaven, ale jedním z ambicioznějších cílů této práce bylo její
+dokončení a propojení s webovou aplikací. To se před termínem
+odevzdání nepodařilo, ale práce na knihovně byly obnoveny a v krátké
+době snad budou úspěšně završeny.
 
 % Doplnit jak bude probíhat integrace přes Docker.
-Integrace do stávající architektury platformy GIS.lab proběhne přes Docker kontejner. Při instalaci platformy GIS.lab si bude moci uživatel zvolit, zda si přeje mít dostupné i webové administrační rozhraní či ne. Pokud ano, z konfiguračních souborů vznikne Docker obraz, na jehož základě bude vytvořen kontejner. Konzole, včetně webového serveru, poběží v izolovaném prostředí. Pro zápis konfigurace bude využit Ansible playbook.
+Integrace do stávající architektury platformy GIS.lab proběhne přes
+Docker kontejner. Při instalaci platformy GIS.lab si bude moci
+uživatel zvolit, zda si přeje mít dostupné i webové administrační
+rozhraní či ne. Pokud ano, z konfiguračních souborů vznikne Docker
+obraz, na jehož základě bude vytvořen kontejner. Konzole, včetně
+webového serveru, poběží v izolovaném prostředí. Pro zápis konfigurace
+bude využit Ansible playbook.
 
-Webové administrátorské a uživatelské rozhraní tedy nyní obsahuje základní funkcionalitu s tím, že bude snaha je v brzké době dokončit a zařadit mezi služby platformy GIS.lab.
+Webové administrátorské a uživatelské rozhraní tedy nyní obsahuje
+základní funkcionalitu s tím, že bude snaha je v brzké době dokončit a
+zařadit mezi služby platformy GIS.lab.
