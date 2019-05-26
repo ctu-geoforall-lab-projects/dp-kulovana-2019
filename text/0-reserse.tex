@@ -1,0 +1,28 @@
+\chapter{Rešerše}
+\label{0-reserse}
+
+Framework Django automaticky po~instalaci obsahuje vestavěné
+administrační roz\-hraní. To slouží ke~správě záznamů v~lokální
+databázi. Django umožňuje využít připravené modely \textit{User} a
+\textit{Group} nebo si vytvářet vlastní. Bylo vyvinuto jako komplexní
+nástroj pro~zobrazování a spravování článků, komentářů, uživatelů a
+autorů v~novinářském prostředí. Administrátorské rozhraní pro~správu
+uživatelů a jejich příslušnosti ke~skupinám je jen malou podmnožinou
+toho, co všechno tento framework umí. Django nabízí obsáhlou
+dokumentaci \cite{django-doc}, která usnadňuje jak orientaci v~
+problematice, tak vlastní vývoj.
+
+Prvotní inspirací pro~webovou konzoli byla platforma Gisquick (viz
+\ref{gisquick}), která využívá framework Django. Jedná se o~webovou
+mapovou aplikaci, do~níž se mohou uživatelé zaregistrovat a po~přihlášení 
+zveřejňovat a spravovat své projekty. Po~od\-dělení od~GIS.labu 
+jsou uživatelské účty uloženy ve~výchozí databázi
+SQLite. Verze, jež je integrovaná v~GIS.labu, ale ověřuje přihlašovací
+údaje vůči \zk{LDAP} serveru. Zvolené nastavení připojení k~\zk{LDAP}
+bylo použito v~počáteční fázi vývoje webové konzole GIS.lab.
+
+Dalšími zajímavými projekty, které využívají Django pro~správu
+uživatelů je např. chatovací aplikace Zulip
+(\href{https://zulipchat.com}{https://zulipchat.com}) nebo platforma
+pro~online prodej Oscar
+(\href{http://oscarcommerce.com}{http://oscarcommerce.com}).

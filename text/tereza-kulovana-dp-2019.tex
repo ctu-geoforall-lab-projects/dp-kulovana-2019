@@ -126,12 +126,13 @@
 \misto{Praha}
 
 %% Abstrakt
-\abstrakt {Tato diplomová práce je ...}  {Abstract english}
+\abstrakt {Tato diplomová práce si klade za cíl vytvořit webové administrátorské rozhraní pro~platformu GIS.lab. 
+Rozhraní umožňuje správu uživatelů a definování jejich rolí a oprávnění. Je tvořeno ze dvou částí - uživatelské  konzole a administrátorské konzole. Při tvorbě byl využit framework Django. Data jsou synchronizována mezi lokální databází Djanga a LDAP serverem. Na konec bude webové rozhraní integrováno do GIS.labu jako nová služba přes Docker kontejner.}  {The aim of this diploma thesis is to create a web administration interface for GIS.lab platform. The interface enables user management and defining user roles and permissions. It consists of two parts - user console and admin console. Project uses Django framework. Data are synchronized between local Django database and LDAP server. Eventually, web console is going to be integrated to GIS.lab as a new service using Docker container.}
 
 %% Klíčová slova
 \klicovaslova
-{GIS.lab, Python, Django, ldap, Docker, open source}
-{GIS.lab, Python, Django, ldap, Docker, open source}
+{GIS.lab, Python, Django, LDAP, Docker, administrace, open source}
+{GIS.lab, Python, Django, LDAP, Docker, administration, open source}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -185,7 +186,7 @@
 	\vspace{1em}
 		%\noindent
 	\par\hspace{2ex}
-	{Ráda bych poděkovala ... }
+	{Děkuji Ing.~Martinovi~Landovi,~Ph.D. za cenné rady a vedení mé diplomové práce. Velké díky patří i mé rodině a příteli za projevenou podporu a trpělivost.}
 }
 
 % Vysázení obsahu
@@ -199,6 +200,7 @@
 
 % jednotlivé kapitoly
 \include{1-uvod}
+\include{0-reserse}
 \include{2-teorie}
 \include{3-technologie}
 \include{4-praxe}
@@ -219,7 +221,7 @@
 \prilohy
 
 % Vysázení seznamu příloh
-%\seznampriloh
+\seznampriloh
 
 % Vložení souboru s přílohami
 \include{prilohy}
