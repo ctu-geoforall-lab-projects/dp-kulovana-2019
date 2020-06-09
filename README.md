@@ -43,3 +43,7 @@ June 2019
 ## Original reference
 
 https://github.com/gislab-npo/gislab/issues/297
+
+## Text
+
+[PDF](text/tereza-kulovana-dp-2019.pdf)
